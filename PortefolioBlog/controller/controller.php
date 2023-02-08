@@ -1,5 +1,5 @@
 <?php
 
 function home() {
-    require('view/homeView.php');
+    require('../view/homeView.php');
 }
