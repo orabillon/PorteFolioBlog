@@ -3,8 +3,6 @@
 require('../controller/controller.php');
 require('../Utility/utility.php');
 
-//echo getUri($_SERVER['REQUEST_URI']);
-
 try {
     if(isset($_GET['page'])) {
 
@@ -17,7 +15,19 @@ try {
 
     }
     else {
-        home();
+        $PageEnCours = getUri($_SERVER['REQUEST_URI']);
+        if($PageEnCours != ""){
+            if ($PageEnCours == "home" || $PageEnCours == "accueil" ) {
+                home();
+            }
+            {
+                throw new Exception("Cette page n'existe pas ou a été supprimée.");
+            }
+        }
+        else{
+            home();
+        }
+
     }
 }
 catch(Exception $e) {
