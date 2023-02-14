@@ -7,6 +7,7 @@ ob_start();
 <section class="container">
 
     <h1>Bienvenue sur mon site MVC</h1>
+    <i class="fa-solid fa-user"></i>
 
 </section>
 

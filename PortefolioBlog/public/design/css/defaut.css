@@ -1,24 +1,4 @@
 @charset "UTF-8";
-html, body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-}
-
-header {
-  background-color: #3498db;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-  font-weight: bold;
-  font-size: 3rem;
-  margin-bottom: 3rem;
-}
-
-.container {
-  width: 800px;
-  margin: auto;
-}
-
 /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
@@ -3141,7 +3121,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #6c757d;
   --bs-btn-disabled-border-color: transparent;
   --bs-btn-box-shadow: none;
-  --bs-btn-focus-shadow-rgb: 159, 96, 185;
+  --bs-btn-focus-shadow-rgb: 44, 129, 186;
   text-decoration: underline;
 }
 .btn-link:focus-visible {
@@ -10874,6 +10854,24 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+html, body {
+  font-family: "Mulish", sans-serif;
+}
+
+header {
+  background-color: #3498db;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+
+.container {
+  width: 800px;
+  margin: auto;
 }
 
 /*# sourceMappingURL=defaut.css.map */

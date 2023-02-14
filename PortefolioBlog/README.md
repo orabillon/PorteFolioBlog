@@ -15,8 +15,7 @@ Le but de ce projet est de réaliser un site mettant à disposition un blog et u
 
 ## Liste des technologies utilisées : 
 
-- HTML 
-- CSS
+- HTML
 - Sass
 - Bootstrap 
 - PHP / MySQL
@@ -26,3 +25,5 @@ Voici les différentes étapes de travaille :
 - 06/02/2023 : Création structure fichier de base 
 - 07/02/2023 : Mise en place du système de réécriture d'URL
 - 10/02/2023 : Création de la structure de la base de données Mysql
+- 11/02/2023 : Modification de la structure de la base
+- 14/02/2023 : Ajout table users et role + recherche idée theme graphique + choix font et ajout icone
