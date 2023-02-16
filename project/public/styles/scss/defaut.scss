@@ -1,0 +1,41 @@
+// Personalisation bootstrap
+
+// import préalable obligatoire
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+
+// Definition couleur existante
+$primary:  #3498db;
+$danger: #48dbfb;
+
+
+// Creation nouvelle couleur
+$custom-colors: (
+        "toto": #2ecc71
+);
+
+// Merge maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+
+// Regle specifique
+html, body {
+  font-family: 'Mulish', sans-serif;
+}
+
+header {
+  background-color: $primary;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+
+.container {
+  width: 800px;
+  margin: auto;
+}
