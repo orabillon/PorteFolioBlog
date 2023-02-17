@@ -13,3 +13,4 @@ CREATE TABLE `BlogPorteFolio`.`Role` ( `idRole` INT NOT NULL AUTO_INCREMENT , `r
 
 
 INSERT INTO `Role` (`role`) VALUES ('user'), ('admin');
+INSERT INTO `Users` (`idUser`, `pseudo`, `email`, `secret`, `date`, `blocked`, `password`, `roleId`) VALUES (NULL, 'ORA', 'ora@mail.fr', 'aa', CURRENT_TIMESTAMP, '0', 'aa', '1');

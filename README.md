@@ -28,3 +28,4 @@ Voici les différentes étapes de travaille :
 - 11/02/2023 : Modification de la structure de la base
 - 14/02/2023 : Ajout table users et role + recherche idée theme graphique + choix font et ajout icone
 - 16/02/2023 : Passage du projet en mode docker 
+- 17/02/2023 : Mise en place MVC complet avec connection bdd

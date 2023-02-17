@@ -1,7 +1,7 @@
 <?php
 
-require('../src/controller/controller.php');
-require('../src/Utility/utility.php');
+require('../controller/controller.php');
+require('../Utility/utility.php');
 
 try {
     if(isset($_GET['page'])) {
