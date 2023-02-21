@@ -16,10 +16,15 @@ try {
     }
     else {
         $PageEnCours = getUri($_SERVER['REQUEST_URI']);
+
         if($PageEnCours != ""){
             if ($PageEnCours == "home" || $PageEnCours == "accueil" ) {
                 home();
             }
+            elseif ($PageEnCours == "test") {
+                test();
+            }
+            else
             {
                 throw new Exception("Cette page n'existe pas ou a été supprimée.");
             }

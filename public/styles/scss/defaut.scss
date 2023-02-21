@@ -4,14 +4,17 @@
 @import "../../../node_modules/bootstrap/scss/functions";
 @import "../../../node_modules/bootstrap/scss/variables";
 
-// Definition couleur existante
-$primary:  #3498db;
-$danger: #48dbfb;
-
-
-// Creation nouvelle couleur
+// Creation nouvelle couleur + redefinition
 $custom-colors: (
-        "toto": #2ecc71
+        "primary" :#5352ed,
+        "secondary": #70a1ff,
+        "success": #2ed573,
+        "info": #7bed9f,
+        "warning": #ff7f50,
+        "danger": #ff4757,
+        "light": #ced6e0,
+        "dark": #2f3542,
+        "corp": #f1f2f6
 );
 
 // Merge maps
@@ -26,8 +29,6 @@ html, body {
 }
 
 header {
-  background-color: $primary;
-  color: white;
   padding: 1rem;
   text-align: center;
   font-weight: bold;
@@ -36,6 +37,7 @@ header {
 }
 
 .container {
-  width: 800px;
+  width: 900px;
   margin: auto;
 }
+
