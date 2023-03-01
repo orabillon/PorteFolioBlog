@@ -2,15 +2,15 @@
 
 function home() {
     require('../model/UserManager.php');
-    
 
     $userManager        = new UserManager();
-    $requete            = $userManager->getUsers();
+    $requeteUser        = $userManager->getUsers();
 
     require('../view/homeView.php');
 }
 
 function test(){
+
     require('../view/testView.php');
 }
 

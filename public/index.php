@@ -16,6 +16,7 @@ try {
     }
     else {
         $PageEnCours = getUri($_SERVER['REQUEST_URI']);
+        $ParamPage = getUriParam($_SERVER['REQUEST_URI'])["categorie"];
 
         if($PageEnCours != ""){
             if ($PageEnCours == "home" || $PageEnCours == "accueil" ) {

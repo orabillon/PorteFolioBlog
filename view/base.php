@@ -1,3 +1,19 @@
+<?php
+    require_once('../model/CategorieManager.php');
+    $categorieManager = new CategorieManager();
+    $requeteCategorie = $categorieManager->getCategories();
+    ob_start();
+    while($cate = $requeteCategorie->fetch()) {
+
+        ?>
+        <li><a class="dropdown-item" href="<?= $cate['url']?>"><?= $cate['theme']?></a></li>
+        <?php
+    }
+
+    $listeCategories = ob_get_clean();
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,8 +32,8 @@
 
 </head>
 
-<body class="bg-corp">
-<nav class="navbar navbar-dark bg-dark navbar-expand-md">
+<body class="<?php if ($BlogActif){ echo 'bg-Bcorp';} else { echo 'bg-corp'; } ?>">
+<nav class="navbar navbar-dark <?php if ($BlogActif){ echo 'bg-Bprimary';} else { echo 'bg-secondary'; } ?> navbar-expand-md">
     <div class="container">
         <div class="navbar-brand">
             JHON DOE
@@ -29,11 +45,15 @@
 
         <div class="collapse navbar-collapse "  id="MenuDeroulant">
             <ul class="navbar-nav">
-                <li class="nav-item ">
-                    <a href="home" class="nav-link <?php if ($BlogActif){ echo 'active';} ?> ">BLOG</a>
+
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle  <?php if ($BlogActif){ echo 'active';} ?> " data-bs-toggle="dropdown">Aventure de bébé</a>
+                    <ul class="dropdown-menu">
+                        <?= $listeCategories ?>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="test" class="nav-link <?php if ($PorteFolioActif){ echo 'active';} ?>">PORTE FOLIO</a>
+                    <a href="test" class="nav-link <?php if ($PorteFolioActif){ echo 'active';} ?>">Mes créations</a>
                 </li>
             </ul>
         </div>

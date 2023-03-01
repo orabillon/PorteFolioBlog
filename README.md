@@ -19,6 +19,7 @@ Le but de ce projet est de réaliser un site mettant à disposition un blog et u
 - Sass
 - Bootstrap 
 - PHP / MySQL
+- chat GPT : utilisation pour la génération de faux article de blog (contenu d'article : non verifier)
 
 Voici les différentes étapes de travaille :
 
@@ -31,3 +32,5 @@ Voici les différentes étapes de travaille :
 - 17/02/2023 : Mise en place MVC complet avec connection bdd
 - 20/02/2023 : Poc utilisation tiny
 - 21/02/2023 : Mise en place theme + navigation + resolution bug tiny 
+- 23/02/2023 : Idee blog enfin trouvé, retravaille du theme, page de base 
+- 01/03/2023 : Correction et fin système de navigation 

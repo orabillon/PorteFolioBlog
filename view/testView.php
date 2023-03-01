@@ -2,6 +2,9 @@
 $title = "Test";
 $PorteFolioActif = true;
 $content = "<h1>TEST</h1>";
+
+
+// generation du contenu
 ob_start();
 ?>
     <form action="test" method="post">
@@ -33,3 +36,5 @@ ob_start();
 $content = ob_get_clean();
 
 require('base.php');
+
+?>
