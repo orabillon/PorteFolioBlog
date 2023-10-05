@@ -13,7 +13,7 @@ les technologies employées seront :
 
 - HTML / CSS / JAVASCRIP
 - Bootstrap / Sass
-- PHP / MYSQL
+- PHP / MYSQL 
 
 Voici les differentes étapes de travaille :
 
