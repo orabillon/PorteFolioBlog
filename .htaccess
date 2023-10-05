@@ -1,0 +1,10 @@
+#active liens symboliques
+Options +FollowSymlinks
+
+#active le moteur d'écriture
+RewriteEngine on 
+
+#regle 
+# RewriteRule [^URL VOULUE$] [URL BASE]
+#RewriteRule ^([-a-z0-9]+)-([-a-z0-9]+)$ ./index.php?page=$1&categorie=$2 [L]
+RewriteRule ^([-a-z0-9]+)$ ./index.php?page=$1 [L]

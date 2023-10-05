@@ -1,0 +1,27 @@
+// import préalable obligatoire
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+
+// Creation nouvelle couleur + re-definition
+$custom-colors: (
+        "primary" : #8e44ad,
+        "danger": #48dbfb
+);
+
+// Merge maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+
+// Ajout espace marge et pading 
+$custom-spacers :(
+        6:($spacer * 6),
+        7:($spacer * 12)
+); 
+
+// Merge maps
+$spacers: map-merge($spacers, $custom-spacers);
+
+
+
+@import "../node_modules/bootstrap/scss/bootstrap";
