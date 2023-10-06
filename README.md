@@ -18,4 +18,4 @@ les technologies employées seront :
 Voici les differentes étapes de travaille :
 
 - 05/10/2023 : Création du projet + Mise en place structure MVC + réécriture URL + Mise en place Sass / bootstrap
-- 06/10/2023 : Création base de données + creation faux articles avec chat GPT pour le contenu + recherche idée theme et presentation page
+- 06/10/2023 : Création base de données + creation faux articles avec chat GPT pour le contenu + recherche idée theme et presentation page + model connection
