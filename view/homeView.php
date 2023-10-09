@@ -1,16 +1,21 @@
 <?php 
 
     $title = "Accueil";
+    $couleurEntete = "bg-secondary";
+    $texteEntete = "MY PROJETS";
+    $couleurTexteEntete = "text-danger";
 
     // mise en cache du contenu de la page pour la creation de la variable du template
     ob_start();
 ?>
 
 <section class="container">
-    <h1 class="text-warning">Accueil</h1>
+    <h1 class="text-third">Accueil</h1>
     <?php
-        if(isset($_SESSION['connect'])){
+        if(isset($_SESSION["connect"])){
+            
             echo "Vous êtes connecter";
+           var_dump($_SESSION);
         }
         else
         {

@@ -31,4 +31,9 @@ session_start();
               require("view/blogView.php");
        }
 
+       function me()
+       {
+              require("view/meView.php"); 
+       }
+
        

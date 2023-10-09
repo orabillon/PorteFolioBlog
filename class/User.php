@@ -17,7 +17,7 @@ class User extends Manager {
     public function getPassword() {return $this->_password; }
 
     private function setId($id) { $this->_id = $id; }
-    private function setFirstName($firstName){ $this->_lastName = $firstName; }
+    private function setFirstName($firstName){ $this->_firstName = $firstName; }
     private function setLastName($lastName){ $this->_lastName = $lastName; }
     private function setMail($mail) { $this->_mail = $mail; }
     private function setPassword($Password) { $this->_password = $Password; }
@@ -62,9 +62,10 @@ class User extends Manager {
 
     public function creerLesSessions()
     {
-        $_SESSION["connect"] = true;
-        $_SESSION["firstName"] = $this->getFirstName();
-        $_SESSION["lastName"] = $this->getLastName();
-        $_SESSION["mail"]   = $this->getMail();
+        $_SESSION["connect"]     = true;
+        $_SESSION["idUser"]      = $this->getId();
+        $_SESSION["firstName"]   = $this->getFirstName();
+        $_SESSION["lastName"]    = $this->getLastName();
+        $_SESSION["email"]       = $this->getMail();
     }
 }

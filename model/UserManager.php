@@ -33,7 +33,7 @@ class UserManager extends Manager {
                 {
                     if($Result["password"] == $_pass)
                     {
-                        return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"]);
+                        return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"]);
                     }
                     else{
                         return 0;

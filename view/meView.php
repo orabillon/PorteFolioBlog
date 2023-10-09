@@ -1,7 +1,7 @@
 <?php 
-    $title = "Erreur";
+    $title = "Qui suis-je ?";
     $couleurEntete = "bg-primary";
-    $texteEntete = "ERROR";
+    $texteEntete = "A PROPOS DE MOI";
     $couleurTexteEntete = "text-white";
 
     // mise en cache du contenu de la page pour la creation de la variable du template
@@ -10,7 +10,7 @@
 
 <section>
     <h1>Oups</h1>
-    <p><?= $Error?></p>
+    
 </section>
 
 <?php 
