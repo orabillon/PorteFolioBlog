@@ -64,4 +64,15 @@ session_start();
               require("view/meView.php"); 
        }
 
+       function article()
+       {
+              if(!empty($_POST["postId"]))
+              {
+                     echo $_POST["postId"];
+              }
+              
+
+              require("view/ArticleView.php"); 
+       }
+
        

@@ -52,9 +52,54 @@
         </ul>
     </div>
 
+    <!-- liste des articles -->
+    <div class="row">
+
     <?php
-        
+       require_once("./model/ArticleManager.php");
+       
+       $_categorie      = "Tous";
+       $_articleManager = new ArticleManager();
+
+       if (isset($_GET["categorie"]))
+       {
+           $_categorie = htmlspecialchars($_GET["categorie"]);
+       }
+
+       $_liste = $_articleManager->getListeArticle($_categorie);
+
+       while($_resultat = $_liste->fetch())
+       {
+        // création des cartes
+        ?>
+            <div class="col-lg-4 col-md-6">
+                <div class="card m-3"> 
+                    <?php
+                        // recuperation image
+                        $resultat = $_articleManager->getImageCardArticle($_resultat["id"]);
+                        if( $resultat != null){
+                            echo '<img src="./public/Assets/'.$resultat.'" alt="Echarpe" class="card-img-top" />';
+                        }
+                    ?>
+                    <div class="card-body" style="min-height: 110px">
+                        <h5><?= $_resultat["description"] ?></h5>
+                    </div>
+                    <div class="card-footer">
+                        <form method="post" action="article">
+                            <input type="hidden" id="postId" name="postId" value="<?= $_resultat["id"] ?>" />
+                            <button type="submit" class="btn w-100 btn-outline-secondary">Détail</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php
+       }
+
     ?>
+
+        
+
+   
 
 </section>
 

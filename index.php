@@ -14,6 +14,9 @@
             else if ($_page == "moi"){
                 me();
             }
+            else if ($_page == "article"){
+                article();
+            }
             else{
                 throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
             }
