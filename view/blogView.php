@@ -9,7 +9,17 @@
 ?>
 
 <section class="container">
-    <h1 class="text-primary">Articles</h1>
+    <h1 class="text-primary">
+        Articles
+        <span class="text-capitalize">
+            <?php
+            if (isset($_GET["categorie"]))
+            {
+                echo  " - ".$_GET["categorie"];
+            }
+            ?>
+        </span>
+    </h1>
         
     <!-- liste déroulante -->
     <div class="dropdown m-3">
@@ -20,6 +30,9 @@
 
         <!-- Les éléments du menu -->
         <ul class="dropdown-menu" aria-labbeledby="filtreCategorie">
+
+        <li><a class="dropdown-item" href="blog">Tous</a></li>
+
             <?php
                 require_once("./model/categorieManager.php");
 
@@ -40,10 +53,7 @@
     </div>
 
     <?php
-        if (isset($_GET["categorie"]))
-        {
-            echo $_GET["categorie"];
-        }
+        
     ?>
 
 </section>

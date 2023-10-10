@@ -5,6 +5,8 @@ CREATE TABLE `portefolio_blog`.`comments` (`id` INT NOT NULL AUTO_INCREMENT , `i
 CREATE TABLE `portefolio_blog`.`projects` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `date_creation` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , `display` BOOLEAN NOT NULL DEFAULT FALSE , `description` TEXT NOT NULL , `content` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 CREATE TABLE `portefolio_blog`.`images` (`id` INT NOT NULL AUTO_INCREMENT , `id_project` INT NULL DEFAULT NULL , `id_article` INT NULL DEFAULT NULL , `image` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 CREATE TABLE `portefolio_blog`.`categories` (`id` INT NOT NULL AUTO_INCREMENT , `categorie` VARCHAR(50) NOT NULL, `url` VARCHAR(50) NOT NULL , `active` BOOLEAN NOT NULL DEFAULT TRUE , `date_creation` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , `date_update` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `portefolio_blog`.`message_status` (`id` INT NOT NULL AUTO_INCREMENT , `status` VARCHAR(20) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `portefolio_blog`.`messages` (`id` INT NOT NULL AUTO_INCREMENT , `id_status` INT NOT NULL DEFAULT '1' , `first_name` VARCHAR(50) NOT NULL , `last_name` VARCHAR(50) NOT NULL , `email` VARCHAR(50) NOT NULL , `content` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 // insertion jeu test
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `date_creation`, `date_update`, `password`, `blocked`, `admin`) VALUES (NULL, 'Olivier', 'Rabillon', 'olivier.rabillon@gmail.com', current_timestamp(), current_timestamp(), 'aq471cdece319dcc596802561da9cc75f8f1daea52aa27', '0', '1') // pass "admin"
@@ -14,6 +16,7 @@ INSERT INTO `articles` (`id`, `content`, `date_creation`, `date_update`, `publis
 INSERT INTO `images` (`id`, `id_project`, `id_article`, `image`) VALUES (NULL, NULL, '1', 'Egypte1.jpg'), (NULL, NULL, '1', 'Egypte2.jpg')
 INSERT INTO `images` (`id`, `id_project`, `id_article`, `image`) VALUES (NULL, NULL, '2', 'Japon1.jpg'), (NULL, NULL, '2', 'Japon2.jpg'), (NULL, NULL, '2', 'Japon3.jpg');
 INSERT INTO `images` (`id`, `id_project`, `id_article`, `image`) VALUES (NULL, NULL, '3', 'Forest1.jpg'), (NULL, NULL, '3', 'Forest2.jpg'), (NULL, NULL, '3', 'Forest3.jpg');
-INSERT INTO `comments` (`id`, `id_user`, `id_article`, `content`) VALUES (NULL, '2', '2', 'Super, sa donne vraiment envie d\'y allez')
+INSERT INTO `comments` (`id`, `id_user`, `id_article`, `content`) VALUES (NULL, '2', '2', 'Super, sa donne vraiment envie d\'y allez');
+INSERT INTO `message_status` (`id`, `status`) VALUES (NULL, 'Nouveau'), (NULL, 'Lu');
 
 

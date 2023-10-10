@@ -33,6 +33,34 @@ session_start();
 
        function me()
        {
+              require_once("./model/MessageManager.php");
+
+              $_SESSION["msgEnvoyer"] = 0;
+
+              if(!empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["email"]) && !empty($_POST["message"]))
+              {
+                     // enregistrement message en base
+                     $_messageManager = new MessageManager();
+
+                     //Securisation variable
+                     $_firstName   = htmlspecialchars($_POST["firstName"]);
+                     $_lastName    = htmlspecialchars($_POST["lastName"]);
+                     $_mail        = htmlspecialchars($_POST["email"]);
+                     $_message     = htmlspecialchars($_POST["message"]);
+
+                     if($_messageManager->EnregistrerMessage($_firstName, $_lastName, $_mail, $_message))
+                     {
+                            $_SESSION["msgEnvoyer"] = 1;
+                     }
+                     else
+                     {
+                            $_SESSION["msgEnvoyer"] = 2;
+                     }
+                     
+                    
+              }
+              
+
               require("view/meView.php"); 
        }
 
