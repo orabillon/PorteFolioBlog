@@ -26,6 +26,20 @@
             return $requete;
         }
 
+        function getArticle($idArticle)
+        {
+
+            $_idArticle = htmlspecialchars($idArticle);
+
+            $bdd = $this->getConnection();
+            $requete = null;
+
+            $requete = $bdd->prepare("SELECT articles.id, articles.content, articles.date_creation, articles.title, articles.description FROM articles WHERE articles.id = ? ");
+            $requete->execute([$_idArticle]);
+            
+            return $requete;
+        }
+
         function getImageCardArticle($idArticle)
         {
             $_idArticle = htmlspecialchars($idArticle);
@@ -41,6 +55,19 @@
             }
 
             return null;
+        }
+
+        function getListeImagedArticle($idArticle)
+        {
+            $_idArticle = htmlspecialchars($idArticle);
+
+            $bdd = $this->getConnection();
+            
+            $requete = $bdd->prepare("SELECT * FROM images WHERE id_article = ? ");
+            $requete->execute([$_idArticle]);
+
+            return $requete;
+
         }
 
     }

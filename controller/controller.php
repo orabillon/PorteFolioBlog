@@ -68,7 +68,7 @@ session_start();
        {
               if(!empty($_POST["postId"]))
               {
-                     echo $_POST["postId"];
+                     $_SESSION["idArticle"] = $_POST["postId"];
               }
               
 
