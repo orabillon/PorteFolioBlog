@@ -20,24 +20,52 @@ class UserManager extends Manager {
     public function searchUser($mail, $password)
     {
         $bdd = $this->getConnection();
-        $requete = $bdd->prepare("SELECT COUNT(*) as nb FROM users WHERE email = ?");
+        $requete = $bdd->prepare("SELECT COUNT(*) as nb FROM users WHERE email = ? AND blocked = 0");
         $requete->execute([$mail]);
 
         while( $Result = $requete->fetch()){
 			if($Result["nb"] == 1){
 
                 $_pass = Security::chiffer($password);
-                $requete2 = $bdd->prepare("SELECT * FROM users WHERE email = ?");
+                $requete2 = $bdd->prepare("SELECT * FROM users WHERE email = ? AND blocked = 0");
                 $requete2->execute([$mail]);
                 while( $Result = $requete2->fetch())
                 {
                     if($Result["password"] == $_pass)
                     {
-                        return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"]);
+                        return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"], $Result["secret"]);
                     }
                     else{
                         return 0;
                     }
+                }
+
+			}
+            else
+            {
+                return 0;
+            }
+		}
+
+    }
+
+    public function searchUserCookie($secret)
+    {
+        $_secret = htmlspecialchars($secret);
+        
+        $bdd = $this->getConnection();
+        $requete = $bdd->prepare("SELECT COUNT(*) as nb FROM users WHERE secret = ?");
+        $requete->execute([$_secret]);
+
+        while( $Result = $requete->fetch()){
+			if($Result["nb"] == 1){
+
+               
+                $requete2 = $bdd->prepare("SELECT * FROM users WHERE secret = ?");
+                $requete2->execute([$_secret]);
+                while( $Result = $requete2->fetch())
+                {
+                    return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"],$Result["secret"]);
                 }
 
 			}

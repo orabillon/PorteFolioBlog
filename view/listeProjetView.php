@@ -1,7 +1,7 @@
 <?php 
-    $title = "Erreur";
+    $title = "Liste projet";
     $couleurEntete = "bg-primary";
-    $texteEntete = "Erreur";
+    $texteEntete = "Mes Projets";
     $couleurTexteEntete = "text-white";
 
     // mise en cache du contenu de la page pour la creation de la variable du template
@@ -9,8 +9,8 @@
 ?>
 
 <section>
-    <h1>Oups</h1>
-    <p><?= $Error?></p>
+    <h1>Projets</h1>
+  
 </section>
 
 <?php 

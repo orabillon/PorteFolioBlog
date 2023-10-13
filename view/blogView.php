@@ -1,14 +1,14 @@
 <?php 
     $title = "Blog";
     $couleurEntete = "bg-third";
-    $texteEntete = "BREAKING NEWS";
+    $texteEntete = "Breaking News";
     $couleurTexteEntete = "text-danger";
 
     // mise en cache du contenu de la page pour la creation de la variable du template
     ob_start();
 ?>
 
-<section class="container">
+<section class="container bg-fourth">
     <h1 class="text-primary">
         Articles
         <span class="text-capitalize">

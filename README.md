@@ -25,3 +25,4 @@ Voici les differentes étapes de travaille :
 - 09/10/2023 : Correction erreur + modification theme + template
 - 10/10/2023 : Création page static présentation + envoi message + affichage liste article + création page détail
 - 11/10/2023 : Page détail article
+- 13/10/2023 : Modification article + connection + inscription + souvenir utilisateur 

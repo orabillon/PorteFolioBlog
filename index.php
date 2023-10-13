@@ -4,22 +4,42 @@
     try{
         if (isset($_GET["page"])){
             $_page = htmlspecialchars($_GET["page"]);
+
+            switch ($_page) {
+                case "projet":
+                    projet();
+                    break;
+
+                case "blog":
+                    blog();
+                    break;
+                
+                case "article":
+                    article();
+                    break;
+
+                case "moi":
+                    me();
+                    break;
+
+                case "connection":
+                    connection();
+                    break;
+                
+                case "inscription":
+                    inscription();
+                    break;
+
+                case "compte":
+                    compte();
+                    break;
+                
+                default:
+                    throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
+                    break;
+            }
     
-            if ($_page == "projet"){
-                home();
-            }
-            else if ($_page == "blog"){
-                blog();
-            }
-            else if ($_page == "moi"){
-                me();
-            }
-            else if ($_page == "article"){
-                article();
-            }
-            else{
-                throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
-            }
+            
         }
         else
         {

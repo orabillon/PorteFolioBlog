@@ -78,6 +78,63 @@
                 ?>
                     
                 </li>
+                <?php 
+                    if (isset($_SESSION["connect"]))
+                    {
+                ?>
+                    <li class="nav-item">
+                    <?php 
+                        if ( isset($_SESSION["connect"]) && (isset($_REQUEST["page"]) && $_REQUEST["page"] == "compte"))
+                        {
+                    ?>
+                        <a href="compte" class="nav-link active">Mon compte</a>
+                    <?php 
+                        }
+                        else
+                        {
+                    ?>
+                        <a href="compte" class="nav-link">Mon compte</a>
+                    <?php 
+                        }
+                       
+                    }
+                    else
+                    {
+                    ?>
+                        <li class="nav-item">
+                    <?php 
+                        if (isset($_REQUEST["page"]) && $_REQUEST["page"] == "connection")
+                        {
+                            // Supprime message d'erreur en cas de clique sur le lien
+                            $_SESSION["userKo"] = false;
+                    ?>
+                        <a href="connection" class="nav-link active">Se connecter</a>
+                    <?php 
+                        }
+                        else
+                        {
+                            $_SESSION["userKo"] = false;
+                    ?>
+                        <a href="connection" class="nav-link">Se connecter</a>
+                    <?php 
+                        }
+                       
+                    }
+                    
+                    ?>
+                    
+                    </li>
+                </li>
+                <?php 
+                    if (isset($_SESSION["connect"]))
+                    {
+                ?>
+                <li class="nav-item">
+                    <a href="logout.php" class="nav-link active">Se déconnecter</a>
+                </li>
+                <?php 
+                    }
+                    ?>
              </ul>
         </div>
     

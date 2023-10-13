@@ -1,7 +1,7 @@
 <?php 
     $title = "Qui suis-je ?";
     $couleurEntete = "bg-primary";
-    $texteEntete = "A PROPOS DE MOI";
+    $texteEntete = "A Propos De Moi";
     $couleurTexteEntete = "text-white";
 
     // mise en cache du contenu de la page pour la creation de la variable du template

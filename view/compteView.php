@@ -1,16 +1,16 @@
 <?php 
-    $title = "Erreur";
-    $couleurEntete = "bg-primary";
-    $texteEntete = "Erreur";
-    $couleurTexteEntete = "text-white";
+
+    $title = "Accueil";
+    $couleurEntete = "bg-secondary";
+    $texteEntete = "Connexion";
+    $couleurTexteEntete = "text-danger";
 
     // mise en cache du contenu de la page pour la creation de la variable du template
     ob_start();
 ?>
 
-<section>
-    <h1>Oups</h1>
-    <p><?= $Error?></p>
+<section class="container bg-fifth">
+   <h1>compte</h1>
 </section>
 
 <?php 
