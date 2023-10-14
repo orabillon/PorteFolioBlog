@@ -5,7 +5,7 @@
     class MessageManager extends Manager 
     {
 
-        function EnregistrerMessage($firstName, $lastName, $mail, $message)
+        function SaveMessage($firstName, $lastName, $mail, $message)
         {
             $bdd = $this->getConnection();
             $requete = $bdd->prepare('INSERT INTO messages(first_name, last_name, email, content) VALUES (?, ?, ?, ?)');

@@ -86,12 +86,17 @@
                     <?php 
                         if ( isset($_SESSION["connect"]) && (isset($_REQUEST["page"]) && $_REQUEST["page"] == "compte"))
                         {
+                            // supprimer les message quand on clique dans la barre de navigation
+                            $_SESSION["cptModif"] = 0;
+                            $_SESSION["pwdModif"] = 0;
                     ?>
                         <a href="compte" class="nav-link active">Mon compte</a>
                     <?php 
                         }
                         else
                         {
+                            $_SESSION["cptModif"] = 0;
+                            $_SESSION["pwdModif"] = 0;
                     ?>
                         <a href="compte" class="nav-link">Mon compte</a>
                     <?php 
@@ -130,7 +135,7 @@
                     {
                 ?>
                 <li class="nav-item">
-                    <a href="logout.php" class="nav-link active">Se déconnecter</a>
+                    <a href="logout.php" class="nav-link">Se déconnecter</a>
                 </li>
                 <?php 
                     }

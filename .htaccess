@@ -6,5 +6,5 @@ RewriteEngine on
 
 #regle 
 # RewriteRule [^URL VOULUE$] [URL BASE]
-RewriteRule ^([-a-z0-9]+)-([-a-z0-9]+)$ ./index.php?page=$1&categorie=$2 [L]
-RewriteRule ^([-a-z0-9]+)$ ./index.php?page=$1 [L]
+RewriteRule ^([-a-zA-Z0-9]+)-([-a-zA-Z0-9]+)$ ./index.php?page=$1&categorie=$2 [L]
+RewriteRule ^([-a-zA-Z0-9]+)$ ./index.php?page=$1 [L]

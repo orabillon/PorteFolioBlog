@@ -82,7 +82,7 @@
                         }
                     ?>
                     <div class="card-body" style="min-height: 110px">
-                        <h5><?= $_resultat["description"] ?></h5>
+                        <h5><?= htmlspecialchars_decode($_resultat["description"]) ?></h5>
                     </div>
                     <div class="card-footer">
                         <form method="post" action="article">

@@ -106,7 +106,7 @@
                     {
                         ?>
                             <div class="alert alert-info">
-                                Message enregistré
+                                Message enregistré.
                             </div>
 
                         <?php
@@ -115,7 +115,7 @@
                     {
                         ?>
                             <div class="alert alert-danger">
-                                Message enregistré
+                                Erreur lors de l'enregistrement du messaage.
                             </div>
 
                         <?php

@@ -20,10 +20,10 @@ class User extends Manager {
     public function getSecret() {return $this->_secret; }
 
     private function setId($id) { $this->_id = $id; }
-    private function setFirstName($firstName){ $this->_firstName = $firstName; }
-    private function setLastName($lastName){ $this->_lastName = $lastName; }
-    private function setMail($mail) { $this->_mail = $mail; }
-    private function setPassword($Password) { $this->_password = $Password; }
+    public function setFirstName($firstName){ $this->_firstName = $firstName; }
+    public function setLastName($lastName){ $this->_lastName = $lastName; }
+    public function setMail($mail) { $this->_mail = $mail; }
+    public function setPassword($Password) { $this->_password = $Password; }
     private function setSecret($Secret) { $this->_secret = $Secret; }
 
     public function __construct($firstName,$lastName, $mail, $Password, $id = 0, $secret = 0)
@@ -44,27 +44,50 @@ class User extends Manager {
         $this->setSecret($_sct);
     }
 
-    public function enregistrer()
+    public function save()
     {
 
         $bdd = $this->getConnection();
 
-        if($this->verificationDoublonMail($this->getMail()))
+        if($this->verifyDuplicateMail($this->getMail()))
         {
             return false;
         }
 
-        // generation secret
-        $this->setSecret(Security::genereSecret($this->getMail()));
+        try{
+            // generation secret
+            $this->setSecret(Security::generateSecret($this->getMail()));
 
-        $req = $bdd->prepare("INSERT INTO users(first_name, last_name, email, password, secret) VALUES(?,?, ?, ?, ?)");
-        $req->execute([$this->getFirstName(), $this->getLastName(), $this->getMail(), $this->getPassword(), $this->getSecret()]);
+            $req = $bdd->prepare("INSERT INTO users(first_name, last_name, email, password, secret) VALUES(?,?, ?, ?, ?)");
+            $req->execute([$this->getFirstName(), $this->getLastName(), $this->getMail(), $this->getPassword(), $this->getSecret()]);
+        }
+        catch (Exception $e)
+        {
+            return false;
+        } 
 
         return true;
 
     }
 
-    public function creerLesSessions()
+    public function update()
+    {
+       try 
+        {
+            $bdd = $this->getConnection();
+
+            $req = $bdd->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, password = ? WHERE id = ?");
+            $req->execute([$this->getFirstName(), $this->getLastName(), $this->getMail(), $this->getPassword(), $this->getId()]);
+        }
+        catch (Exception $e)
+        {
+            return false;
+        }   
+
+        return true;
+    }
+
+    public function createSessions()
     {
         $_SESSION["connect"]     = true;
         $_SESSION["idUser"]      = $this->getId();
@@ -73,7 +96,7 @@ class User extends Manager {
         $_SESSION["email"]       = $this->getMail();
     }
 
-    public function verificationDoublonMail()
+    public function verifyDuplicateMail()
     {
        
         $bdd = $this->getConnection();

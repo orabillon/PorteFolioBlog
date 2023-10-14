@@ -12,6 +12,22 @@ class UserManager extends Manager {
         return $bdd->query('SELECT * FROM users');
     }
 
+    public function getUser($id)
+    {
+        $_id = htmlspecialchars($id);
+
+        $bdd = $this->getConnection();
+        $requete = $bdd->prepare('SELECT * FROM users Where id = ?');
+        $requete->execute([$_id]);
+
+        while($Result = $requete->fetch())
+        {
+            return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"], $Result["secret"]);
+        }
+
+        return 0;
+    }
+
     public function createUser($firstName, $lastName, $mail, $password)
     { 
         return new User($firstName,$lastName, $mail, $password);

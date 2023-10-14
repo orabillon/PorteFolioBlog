@@ -8,7 +8,7 @@
             return "aq47".sha1($_password."kMp87")."27";
         }
 
-        public static function genereSecret($Mail)
+        public static function generateSecret($Mail)
         {
             $_mail = htmlspecialchars($Mail);
 

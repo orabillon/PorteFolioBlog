@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once("option.php");
 
        // ROUTEUR 
@@ -31,7 +29,7 @@ require_once("option.php");
 
                             if(is_object($user))
                             {
-                                 $user->creerLesSessions();  
+                                 $user->createSessions();  
                             }
                             else
                             {
@@ -41,11 +39,6 @@ require_once("option.php");
               }
 
               require("view/connectionView.php");
-       }
-
-       function blog()
-       {
-              require("view/blogView.php");
        }
 
        function me()
@@ -65,7 +58,7 @@ require_once("option.php");
                      $_mail        = htmlspecialchars($_POST["email"]);
                      $_message     = htmlspecialchars($_POST["message"]);
 
-                     if($_messageManager->EnregistrerMessage($_firstName, $_lastName, $_mail, $_message))
+                     if($_messageManager->SaveMessage($_firstName, $_lastName, $_mail, $_message))
                      {
                             $_SESSION["msgEnvoyer"] = 1;
                      }
@@ -79,91 +72,6 @@ require_once("option.php");
               
 
               require("view/meView.php"); 
-       }
-
-       function article()
-       {
-              if(!empty($_POST["postId"]))
-              {
-                     $_SESSION["idArticle"] = $_POST["postId"];
-              }
-              
-
-              require("view/articleView.php"); 
-       }
-
-       function projet()
-       {
-              require("view/listeProjetView.php");
-       }
-
-       function compte()
-       {
-              require("view/compteView.php");  
-       }
-
-       function inscription()
-       {
-              if(!empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["email"]) && !empty($_POST["password"]) && !empty($_POST["password2"]))
-              {
-                     
-                     require_once("./model/UserManager.php");
-                     
-                     $_userManager = new UserManager();
-
-                     //Securisation variable
-                     $_firstName       = htmlspecialchars($_POST["firstName"]);
-                     $_lastName        = htmlspecialchars($_POST["lastName"]);
-                     $_mail            = htmlspecialchars($_POST["email"]);
-                     $_password        = htmlspecialchars($_POST["password"]);
-                     $_verifPassword   = htmlspecialchars($_POST["password2"]);
-
-                     $_SESSION["errInscriptionFirstName"]   = $_firstName;
-                     $_SESSION["errInscriptionLastName"]    = $_lastName;
-                     $_SESSION["errInscriptionMail"]        = $_mail;
-
-                     // test mail
-                     if (!filter_var($_mail, FILTER_VALIDATE_EMAIL)) {
-                            $_SESSION["errInscription"]            = 2;
-                            header('location: inscription');
-                            exit();
-                     }
-       
-                     // test mot de passe
-                     if ($_password != $_verifPassword) {
-                            $_SESSION["errInscription"]            = 3;
-                            header('location: inscription');
-                            exit();
-                     }
-
-                     require_once("./class/User.php");
-                     require_once("./class/Security.php");
-
-                     $_password = Security::chiffer($_password);
-
-                     $_userManager = new UserManager();
-                     $_newUser = $_userManager->createUser($_firstName,$_lastName,$_mail,$_password);
-
-                     // test doublon
-                     if ($_newUser->verificationDoublonMail()){
-                            $_SESSION["errInscription"]            = 1;
-                            header('location: inscription');
-                            exit(); 
-                     }
-              
-                    // tous est ok on creer l'utilisateur
-                    if($_newUser->enregistrer())
-                    {
-                            $_SESSION["errInscription"]            = 4;
-                    }
-                    else
-                    {
-                            $_SESSION["errInscription"]            = 5;
-                    }
-
-              }
-
-              require("view/inscriptionView.php");
        }
 
        

@@ -10,8 +10,9 @@ require_once("./model/UserManager.php");
         $_userManager = new UserManager();
         $_user = $_userManager->searchUserCookie($_secret);
 
+        // test si un utilisateur a été trouvé
         if(is_object($_user))
         {
-             $_user->creerLesSessions();  
+             $_user->createSessions();  
         }
     }

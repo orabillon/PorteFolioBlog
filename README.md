@@ -26,3 +26,4 @@ Voici les differentes étapes de travaille :
 - 10/10/2023 : Création page static présentation + envoi message + affichage liste article + création page détail
 - 11/10/2023 : Page détail article
 - 13/10/2023 : Modification article + connection + inscription + souvenir utilisateur 
+- 14/10/2023 : Correction nom de fonction + Modification structure fichier (controller) + gestion compte 
