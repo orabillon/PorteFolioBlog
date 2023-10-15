@@ -13,6 +13,10 @@
 
     // mise en cache du contenu de la page pour la creation de la variable du template
     ob_start();
+
+    require_once("./model/ArticleManager.php");
+    $_articleManager    = new ArticleManager();
+
 ?>
 
 <section>
@@ -24,9 +28,7 @@
                 <!-- Indicateurs -->
                 <ul class="carousel-indicators">
                     <?php
-                        require_once("./model/ArticleManager.php");
-
-                        $_articleManager    = new ArticleManager();
+                        
                         $_listeImage        = $_articleManager->getListeImagedArticle( $_SESSION["idArticle"]);
                         $_article           = $_articleManager->getArticle($_SESSION["idArticle"]);
 
@@ -47,9 +49,6 @@
                 <div class="carousel-inner">
 
                 <?php
-                        require_once("./model/ArticleManager.php");
-
-                        $_articleManager    = new ArticleManager();
                         $_listeImage        = $_articleManager->getListeImagedArticle($_SESSION["idArticle"]);
 
                         $i = 0;
@@ -110,7 +109,35 @@
                         <a href="connection">Vous devez vous connecter pour pouvoir laisser un commentaire</a>
                     <?php
                 }
+                else
+                {
+                    ?>
+                        <form class="p-2" method="post" action="./addComment">
+                            <p>
+                                <label for="comment" class="form-label">Commentaire :</label>
+                                <textarea class="form-control" name="comment" id="comment" rows="4" required></textarea>
+                            </p>
+                            <p>
+                                <button type="submit" class="btn btn-secondary mb-2">Poster</button>
+                            </p>
+                        </form>
+                    <?php
+                }
             ?>
+            <hr>
+                <?php
+
+                    $_comments = $_articleManager->getListeComment($_SESSION["idArticle"]);
+
+                    while ($com = $_comments->fetch()) 
+                    {
+                        ?>
+                            <p class="fw-bold mb-1"><?= $com["first_name"]; ?> - <?= $com["last_name"] ?> : </p>
+                            <p class="mt-1 text-justify text-break"><?= htmlspecialchars_decode($com["content"]) ?></p>
+                            <br>
+                        <?php
+                    }
+                ?>
         </div>
     </div>
 </section>

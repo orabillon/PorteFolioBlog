@@ -137,7 +137,6 @@ require_once("option.php");
               if(!empty($_POST["password"]) && !empty($_POST["password2"]))
               {
                      require_once("./model/UserManager.php");
-                     require_once("./class/Security.php");
                      
                      $_userManager = new UserManager();
                      $user = $_userManager->getUser($_SESSION["idUser"]);
@@ -174,4 +173,20 @@ require_once("option.php");
               exit();
        }
 
+       function blockAccount()
+       {
+              require_once("./model/UserManager.php");
+                     
+              $_userManager = new UserManager();
+              $user = $_userManager->getUser($_SESSION["idUser"]);
+
+              if(is_object($user))
+              {
+                     $user->blockAccount();
+
+              }
+
+              header("location:logout.php");
+              exit();
+       }
        

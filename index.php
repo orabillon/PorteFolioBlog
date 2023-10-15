@@ -48,6 +48,14 @@
                     case "updateComptePassword":
                         updateComptePassword();
                         break;
+
+                    case "blockAccount":
+                        blockAccount();
+                        break;
+
+                    case "addComment":
+                        addComment();
+                        break;
                 
                     default:
                         throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");

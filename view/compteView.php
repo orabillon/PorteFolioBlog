@@ -134,6 +134,48 @@
     </div>
 </section>
 
+<section class="container bg-fifth">
+    <div class="p-3">
+        <div class="bg-white p-5 bg-white rounded-5">
+            
+<!-- Modale -->
+<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#supprimer">
+    Supprimer mon compte
+</button>
+
+<div class="modal fade" id="supprimer" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Supprimer mon compte</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+                <p class="m-0">Êtes-vous sûr de vouloir supprimer votre compte.</p>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                
+                <form method="post" action="./blockAccount">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</section>
+
 <?php 
     $content = ob_get_clean();
 

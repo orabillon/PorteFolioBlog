@@ -115,7 +115,7 @@
                     {
                         ?>
                             <div class="alert alert-danger">
-                                Erreur lors de l'enregistrement du messaage.
+                                Erreur lors de l'enregistrement du message.
                             </div>
 
                         <?php

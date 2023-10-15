@@ -31,7 +31,7 @@
                 <li class="nav-item">
                     <?php 
                         // recherche de la page active pour mettre le lien en actif dans navigation bootstrap
-                        if (isset($_REQUEST["page"]) && $_REQUEST["page"] == "blog")
+                        if (isset($_REQUEST["page"]) && ($_REQUEST["page"] == "blog" || $_REQUEST["page"] == "article"))
                         {
                     ?>
                         <a href="blog" class="nav-link active">Mon blog</a>
