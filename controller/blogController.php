@@ -34,5 +34,22 @@ require_once("option.php");
               exit();
        }
 
+       function deleteComment()
+       {
+       
+               if(!empty($_POST["idCom"]))
+              {
+                     require_once("./model/ArticleManager.php");
+
+                     $_idComment = htmlspecialchars($_POST["idCom"]);
+
+                     $_articleManager = new ArticleManager();
+                     $_articleManager->deleteComment($_idComment);
+              }
+
+              header("location:article");
+              exit();
+       }
+
 
        

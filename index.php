@@ -56,6 +56,10 @@
                     case "addComment":
                         addComment();
                         break;
+
+                    case "deleteComment":
+                        deleteComment();
+                        break;
                 
                     default:
                         throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
