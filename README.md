@@ -28,3 +28,5 @@ Voici les differentes étapes de travaille :
 - 13/10/2023 : Modification article + connection + inscription + souvenir utilisateur 
 - 14/10/2023 : Correction nom de fonction + Modification structure fichier (controller) + gestion compte 
 - 15/10/2023 : Suppression compte (par blockage via l'utilisateur) + gestion commentaire
+- 16/10/2023 : Mise en place suppression des commentaire
+- 17/10/2023 : Affichage des projets (liste + detail) + Recherche pb non résolu (voir note.txt) + dedbut gestion admin

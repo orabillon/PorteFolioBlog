@@ -6,6 +6,7 @@
     require("controller/userController.php");
     require("controller/blogController.php");
     require("controller/projetController.php");
+    require("controller/adminController.php");
 
    
         try{
@@ -13,6 +14,11 @@
                 $_page = htmlspecialchars($_GET["page"]);
 
                 switch ($_page) {
+
+                    case "listeProjet":
+                        listeProjet();
+                        break;
+
                     case "projet":
                         projet();
                         break;
@@ -61,6 +67,10 @@
                         deleteComment();
                         break;
                 
+                    case "admin":
+                        admin();
+                        break;
+
                     default:
                         throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
                         break;
@@ -74,5 +84,5 @@
         catch(Exception $ex)
         {
             $Error = $ex->getMessage();
-            require("view/ErrorView.php");
+            require("view/errorView.php");
         }

@@ -144,11 +144,15 @@
                                         <?php
                                     }
                                 }
+
+                                $__content = html_entity_decode($com["content"]);
                             ?>
                                  
                                  <?= $com["first_name"]; ?> - <?= $com["last_name"] ?> : </p>
-                            <p class="mt-1 text-justify text-break"><?= htmlspecialchars_decode($com["content"]) ?></p>
-
+                            <?php 
+                                echo "<p class='mt-1 text-justify text-break'>".$__content."</p>";
+                            ?>
+                        
                             <!-- Modale -->
                             <div class="modal fade" id="supprimer-<?= $com["id"] ?>" data-bs-backdrop="static">
                                 <div class="modal-dialog modal-dialog-centered">

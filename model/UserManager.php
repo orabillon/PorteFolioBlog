@@ -22,7 +22,7 @@ class UserManager extends Manager {
 
         while($Result = $requete->fetch())
         {
-            return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"], $Result["secret"]);
+            return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"], $Result["secret"], $Result["admin"]);
         }
 
         return 0;
@@ -49,7 +49,7 @@ class UserManager extends Manager {
                 {
                     if($Result["password"] == $_pass)
                     {
-                        return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"], $Result["secret"]);
+                        return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"], $Result["secret"], $Result["admin"]);
                     }
                     else{
                         return 0;
@@ -81,7 +81,7 @@ class UserManager extends Manager {
                 $requete2->execute([$_secret]);
                 while( $Result = $requete2->fetch())
                 {
-                    return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"],$Result["secret"]);
+                    return new User($Result["first_name"],$Result["last_name"],$Result["email"],$Result["password"],$Result["id"],$Result["secret"], $Result["admin"]);
                 }
 
 			}

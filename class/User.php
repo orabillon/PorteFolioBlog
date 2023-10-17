@@ -12,6 +12,7 @@ class User extends Manager {
     private $_password;
     private $_secret;
     private $_blocked;
+    private $_admin;
 
     public function getId() { return $this->_id; }
     public function getFirstName(){ return $this->_firstName; }
@@ -20,6 +21,7 @@ class User extends Manager {
     public function getPassword() {return $this->_password; }
     public function getSecret() {return $this->_secret; }
     public function getBlocked() {return $this->_blocked; }
+    public function getAdmin() {return $this->_admin; }
 
     private function setId($id) { $this->_id = $id; }
     public function setFirstName($firstName){ $this->_firstName = $firstName; }
@@ -27,9 +29,10 @@ class User extends Manager {
     public function setMail($mail) { $this->_mail = $mail; }
     public function setPassword($Password) { $this->_password = $Password; }
     private function setSecret($Secret) { $this->_secret = $Secret; }
-    private function setBlocked($blocked) {$this->_blocked = 1;}
+    private function setBlocked($blocked) {$this->_blocked = $blocked;}
+    private function setAdmin($admin) {$this->_admin = $admin;}
 
-    public function __construct($firstName,$lastName, $mail, $Password, $id = 0, $secret = 0)
+    public function __construct($firstName,$lastName, $mail, $Password, $id = 0, $secret = 0, $admin = 0)
     {
         $_ln  = htmlspecialchars($lastName);
         $_fn  = htmlspecialchars($firstName);
@@ -37,6 +40,7 @@ class User extends Manager {
         $_psw = htmlspecialchars($Password);
         $_id  = htmlspecialchars($id);
         $_sct = htmlspecialchars($secret);
+        $_adm = htmlspecialchars($admin);
 
 
         $this->setFirstName($_fn);
@@ -45,6 +49,7 @@ class User extends Manager {
         $this->setPassword($_psw);
         $this->setId($_id);
         $this->setSecret($_sct);
+        $this->setAdmin($_adm);
     }
 
     public function save()
@@ -114,6 +119,7 @@ class User extends Manager {
         $_SESSION["firstName"]   = $this->getFirstName();
         $_SESSION["lastName"]    = $this->getLastName();
         $_SESSION["email"]       = $this->getMail();
+        $_SESSION["admin"]       = $this->getAdmin();
     }
 
     public function verifyDuplicateMail()

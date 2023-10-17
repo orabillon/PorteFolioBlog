@@ -20,7 +20,7 @@
             }
             else
             {
-                $requete = $bdd->query("SELECT articles.id, articles.content, articles.date_creation, articles.title, articles.description FROM articles" );
+                $requete = $bdd->query("SELECT articles.id, articles.content, articles.date_creation, articles.title, articles.description FROM articles WHERE published = 1" );
             }
 
             return $requete;
@@ -86,7 +86,8 @@
         function addComment($idArticle, $comment)
         {
             $_idArticle = htmlspecialchars($idArticle);
-            $_comment   = htmlspecialchars($comment);
+            $_comment   = htmlentities($comment); 
+            
 
             try
             {
@@ -101,6 +102,8 @@
             }
             
             return true;
+
+           
 
         }
 

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="public/design/defaut.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/6d87207cfc.js" crossorigin="anonymous"></script>
+    
+
 </head>
 <body class="bg-light">
     <div class="container">
@@ -17,7 +19,7 @@
     </header>
 
     <!-- Barre de navigation -->
-    <nav class="navbar navbar-dark bg-dark navbar-expand-md mt-0">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md mt-0 sticky-top">
     
         <div class="navbar-brand">
             OLIVIER RABILLON
@@ -47,16 +49,16 @@
                 </li>
                 <li class="nav-item">
                 <?php 
-                    if (isset($_REQUEST["page"]) && $_REQUEST["page"] == "projet")
+                    if (isset($_REQUEST["page"]) && ($_REQUEST["page"] == "projet" ||  $_REQUEST["page"] == "listeProjet"))
                     {
                 ?>
-                    <a href="projet" class="nav-link active">Mes projets</a>
+                    <a href="listeProjet" class="nav-link active">Mes projets</a>
                 <?php 
                     }
                     else
                     {
                 ?>
-                    <a href="projet" class="nav-link">Mes projets</a>
+                    <a href="listeProjet" class="nav-link">Mes projets</a>
                 <?php 
                     }
                 ?>  
@@ -75,8 +77,7 @@
                     <a href="moi" class="nav-link">Qui suis-je ?</a>
                 <?php 
                     }
-                ?>
-                    
+                ?> 
                 </li>
                 <?php 
                     if (isset($_SESSION["connect"]))
@@ -127,20 +128,41 @@
                     }
                     
                     ?>
-                    
                     </li>
                 </li>
                 <?php 
-                    if (isset($_SESSION["connect"]))
+                    if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1)
                     {
                 ?>
+                <li class="nav-item">
+                <?php 
+                    if ((isset($_REQUEST["page"]) && $_REQUEST["page"] == "admin") || !isset($_REQUEST["page"]))
+                    {
+                ?>
+                    <a href="admin" class="nav-link active">Administration</a>
+                <?php 
+                    }
+                    else
+                    {
+                ?>
+                    <a href="admin" class="nav-link">Administration</a>
+                <?php 
+                    }
+                }
+                ?>
+                   <?php 
+                    if (isset($_SESSION["connect"]))
+                    {
+                ?> 
+                </li>
                 <li class="nav-item">
                     <a href="logout.php" class="nav-link">Se déconnecter</a>
                 </li>
                 <?php 
                     }
-                    ?>
-             </ul>
+                ?>
+               
+            </ul>
         </div>
     
     </nav>
@@ -149,5 +171,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
 </body>
 </html>

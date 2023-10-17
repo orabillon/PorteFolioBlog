@@ -1,0 +1,9 @@
+Problème rencontrer durant le dev que j'ai pas réussi à resoudre  et ai abbandonner apres des recherches infructueuse et essai de correction multiple: 
+
+- Impossible de faire fonctionner tiny CE, j'arrive bien à afficher l'éditeur mais impossible de faire fonctionner le post du formulaire pour récupérer la saisie.
+
+- la saisie de commentaire avec encodage des caracteres speciaux pour la sauvegarde en bdd fonctionne (htmlspecialchars ou htmlentities) 
+    le decodage aussi mais les balise html ne sont jamais interpreter lors de l'affichage que sa sois par echo ou <?= =>
+    si je sauve en base sans sécurité et que j'affiche la sa marche. 
+
+    --> pour la saisie des articles et projet pas de securisation volontaire pour permetre la mise en forme. 
