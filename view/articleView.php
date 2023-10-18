@@ -17,6 +17,9 @@
     require_once("./model/ArticleManager.php");
     $_articleManager    = new ArticleManager();
 
+    require_once("./model/CommentManager.php");
+    $_commentManager = new CommentManager();
+
 ?>
 
 <section>
@@ -127,7 +130,7 @@
             <hr>
                 <?php
 
-                    $_comments = $_articleManager->getListeComment($_SESSION["idArticle"]);
+                    $_comments = $_commentManager->getListeComment($_SESSION["idArticle"]);
 
                     while ($com = $_comments->fetch()) 
                     {

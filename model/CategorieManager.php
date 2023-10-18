@@ -7,8 +7,15 @@
 
         function getListeCategorie()
         {
-            $bdd = $this->getConnection();
-            return $bdd->query('SELECT * FROM categories');
+           try
+           {
+                $bdd = $this->getConnection();
+                return $bdd->query('SELECT * FROM categories');
+           }
+           catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
         }
 
     }

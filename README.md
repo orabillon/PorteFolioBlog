@@ -30,3 +30,4 @@ Voici les differentes étapes de travaille :
 - 15/10/2023 : Suppression compte (par blockage via l'utilisateur) + gestion commentaire
 - 16/10/2023 : Mise en place suppression des commentaire
 - 17/10/2023 : Affichage des projets (liste + detail) + Recherche pb non résolu (voir note.txt) + dedbut gestion admin
+- 18/10/2023 : Modification suppression compte + fin gestion utilisateur + secutisation site  + recherche bug

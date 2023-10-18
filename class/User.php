@@ -2,6 +2,7 @@
 
 require_once("./class/Security.php");
 require_once("./model/Manager.php");
+require_once("./model/CommentManager.php");
 
 class User extends Manager {
 
@@ -32,7 +33,7 @@ class User extends Manager {
     private function setBlocked($blocked) {$this->_blocked = $blocked;}
     private function setAdmin($admin) {$this->_admin = $admin;}
 
-    public function __construct($firstName,$lastName, $mail, $Password, $id = 0, $secret = 0, $admin = 0)
+    public function __construct($firstName,$lastName, $mail, $Password, $id = 0, $secret = 0, $admin = 0, $blocked = 0)
     {
         $_ln  = htmlspecialchars($lastName);
         $_fn  = htmlspecialchars($firstName);
@@ -41,6 +42,7 @@ class User extends Manager {
         $_id  = htmlspecialchars($id);
         $_sct = htmlspecialchars($secret);
         $_adm = htmlspecialchars($admin);
+        $_blk = htmlspecialchars($blocked);
 
 
         $this->setFirstName($_fn);
@@ -50,6 +52,7 @@ class User extends Manager {
         $this->setId($_id);
         $this->setSecret($_sct);
         $this->setAdmin($_adm);
+        $this->setBlocked($_blk);
     }
 
     public function save()
@@ -84,8 +87,8 @@ class User extends Manager {
         {
             $bdd = $this->getConnection();
 
-            $req = $bdd->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, password = ? WHERE id = ?");
-            $req->execute([$this->getFirstName(), $this->getLastName(), $this->getMail(), $this->getPassword(), $this->getId()]);
+            $req = $bdd->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, password = ?, blocked = ?, admin = ? WHERE id = ?");
+            $req->execute([$this->getFirstName(), $this->getLastName(), $this->getMail(), $this->getPassword(), $this->getBlocked(), $this->getAdmin() ,$this->getId()]);
         }
         catch (Exception $e)
         {
@@ -95,14 +98,52 @@ class User extends Manager {
         return true;
     }
 
-    public function blockAccount()
+    public function blockAccount($blocked)
+    {
+        $_blocked = htmlspecialchars($blocked);
+        try 
+        {
+            $this->setBlocked($_blocked);
+            $this->update();
+        }
+        catch (Exception $e)
+        {
+            return false;
+        }   
+
+        return true;
+    }
+
+    public function AdminAccount($admin)
+    {
+        $_admin = htmlspecialchars($admin);
+        try 
+        {
+            $this->setAdmin($_admin);
+            $this->update();
+        }
+        catch (Exception $e)
+        {
+            return false;
+        }   
+
+        return true;
+    }
+
+    public function deleteAccount()
     {
         try 
         {
             $bdd = $this->getConnection();
 
-            $req = $bdd->prepare("UPDATE users SET blocked = 1 WHERE id = ?");
+            //suppression des commentaire 
+            $_commentManager = new CommentManager();
+            $_commentManager->deleteAllUserComments($this->getId());
+
+            // suppression user
+            $req = $bdd->prepare("DELETE FROM users WHERE id = ?");
             $req->execute([$this->getId()]);
+
         }
         catch (Exception $e)
         {
@@ -125,6 +166,8 @@ class User extends Manager {
     public function verifyDuplicateMail()
     {
        
+        try
+        {
         $bdd = $this->getConnection();
 
         $req = $bdd->prepare("SELECT COUNT(*) AS nb FROM users WHERE email = ? AND blocked = 0");
@@ -139,5 +182,10 @@ class User extends Manager {
         }
 
         return false;
+        }
+        catch (Exception $ex)
+        {
+            return false;
+        }
     }
 }

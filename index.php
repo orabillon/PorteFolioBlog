@@ -55,8 +55,8 @@
                         updateComptePassword();
                         break;
 
-                    case "blockAccount":
-                        blockAccount();
+                    case "deleteAccount":
+                        deleteAccount();
                         break;
 
                     case "addComment":
@@ -71,6 +71,29 @@
                         admin();
                         break;
 
+                    case "deleteUserAdmin":
+                        adminDeleteUser();
+                        break;
+
+                    case "lockUserAdmin":
+                        adminLockUser();
+                        break;
+
+                    case "unLockUserAdmin":
+                        adminUnLockUser();
+                        break;
+
+                    case "addUserAdmin":
+                        adminUser(1);
+                        break;
+
+
+                    case "delUserAdmin":
+                        adminUser(0);
+                        break;
+
+                        
+                
                     default:
                         throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
                         break;

@@ -164,7 +164,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
                 
-                <form method="post" action="./blockAccount">
+                <form method="post" action="./deleteAccount">
                     <button type="submit" class="btn btn-danger">Supprimer</button>
                 </form>
             </div>

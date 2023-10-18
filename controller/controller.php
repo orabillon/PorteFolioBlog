@@ -29,7 +29,17 @@ require_once("option.php");
 
                             if(is_object($user))
                             {
-                                 $user->createSessions();  
+                                 if($user->getBlocked() == 0)
+                                 {
+                                   $user->createSessions();  
+                                 }
+                                 else
+                                 {
+                                   $_SESSION["userKo"] = true;
+                                   $_SESSION["userBlocked"] = true;
+                                 }
+                                 
+                                   
                             }
                             else
                             {
@@ -43,35 +53,42 @@ require_once("option.php");
 
        function me()
        {
-              require_once("./model/MessageManager.php");
-
-              $_SESSION["msgEnvoyer"] = 0;
-
-              if(!empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["email"]) && !empty($_POST["message"]))
+              try
               {
-                     // enregistrement message en base
-                     $_messageManager = new MessageManager();
+                     require_once("./model/MessageManager.php");
 
-                     //Securisation variable
-                     $_firstName   = htmlspecialchars($_POST["firstName"]);
-                     $_lastName    = htmlspecialchars($_POST["lastName"]);
-                     $_mail        = htmlspecialchars($_POST["email"]);
-                     $_message     = htmlspecialchars($_POST["message"]);
+                     $_SESSION["msgEnvoyer"] = 0;
 
-                     if($_messageManager->SaveMessage($_firstName, $_lastName, $_mail, $_message))
+                     if(!empty($_POST["firstName"]) && !empty($_POST["lastName"]) && !empty($_POST["email"]) && !empty($_POST["message"]))
                      {
-                            $_SESSION["msgEnvoyer"] = 1;
-                     }
-                     else
-                     {
-                            $_SESSION["msgEnvoyer"] = 2;
+                            // enregistrement message en base
+                            $_messageManager = new MessageManager();
+
+                            //Securisation variable
+                            $_firstName   = htmlspecialchars($_POST["firstName"]);
+                            $_lastName    = htmlspecialchars($_POST["lastName"]);
+                            $_mail        = htmlspecialchars($_POST["email"]);
+                            $_message     = htmlspecialchars($_POST["message"]);
+
+                            if($_messageManager->SaveMessage($_firstName, $_lastName, $_mail, $_message))
+                            {
+                                   $_SESSION["msgEnvoyer"] = 1;
+                            }
+                            else
+                            {
+                                   $_SESSION["msgEnvoyer"] = 2;
+                            }
+                            
+                     
                      }
                      
-                    
-              }
-              
 
-              require("view/meView.php"); 
+                     require("view/meView.php"); 
+              }
+              catch (Exception $ex)
+              {
+                     throw new Exception($ex->getMessage());
+              }
        }
 
        

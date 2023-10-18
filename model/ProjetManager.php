@@ -7,55 +7,79 @@
 
         function getListeProjet()
         {
-            $bdd = $this->getConnection();
-            $requete = $bdd->query("SELECT * FROM projects WHERE display = 1" );
+            try
+            {
+                $bdd = $this->getConnection();
+                $requete = $bdd->query("SELECT * FROM projects WHERE display = 1" );
             
-            return $requete;
+                return $requete;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
         }
 
         function getProjet($idProjet)
         {
+            try
+            {
+                $_idProjet = htmlspecialchars($idProjet);
 
-            $_idProjet = htmlspecialchars($idProjet);
+                $bdd = $this->getConnection();
 
-            $bdd = $this->getConnection();
-
-            $requete = $bdd->prepare("SELECT * FROM projects WHERE id = ? ");
-            $requete->execute([$_idProjet]);
-            
-            return $requete;
+                $requete = $bdd->prepare("SELECT * FROM projects WHERE id = ? ");
+                $requete->execute([$_idProjet]);
+                
+                return $requete;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
         }
 
         function getImageCardProjet($idProjet)
         {
-            $_idProjet = htmlspecialchars($idProjet);
-
-            $bdd = $this->getConnection();
-            
-            $requete = $bdd->prepare("SELECT * FROM images WHERE id_project = ? ");
-            $requete->execute([$_idProjet]);
-
-            while($_resultat = $requete->fetch())
+            try
             {
-                return $_resultat["image"];
-            }
+                $_idProjet = htmlspecialchars($idProjet);
 
-            return null;
+                $bdd = $this->getConnection();
+                
+                $requete = $bdd->prepare("SELECT * FROM images WHERE id_project = ? ");
+                $requete->execute([$_idProjet]);
+
+                while($_resultat = $requete->fetch())
+                {
+                    return $_resultat["image"];
+                }
+
+                return null;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
         }
 
         function getListeImagedProjet($idProjet)
         {
-            $_idProjet = htmlspecialchars($idProjet);
+            try
+            {
+                $_idProjet = htmlspecialchars($idProjet);
 
-            $bdd = $this->getConnection();
-            
-            $requete = $bdd->prepare("SELECT * FROM images WHERE id_project = ? ");
-            $requete->execute([$_idProjet]);
+                $bdd = $this->getConnection();
+                
+                $requete = $bdd->prepare("SELECT * FROM images WHERE id_project = ? ");
+                $requete->execute([$_idProjet]);
 
-            return $requete;
+                return $requete;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
 
         }
-
-        
-
     }

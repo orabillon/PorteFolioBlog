@@ -32,12 +32,24 @@
             // message erreur de connection
             if(isset($_SESSION["userKo"]) && $_SESSION["userKo"] == true)
             {
-                ?>
-                    <div class="alert alert-danger">
-                        Impossible de vous identifier correctement. 
-                    </div>
+                if(isset($_SESSION["userBlocked"]) && $_SESSION["userBlocked"] == true)
+                {
+                    ?>
+                        <div class="alert alert-warning">
+                            Votre compte est bloquer. 
+                        </div>
 
-                <?php
+                    <?php
+                }
+                else
+                {
+                    ?>
+                        <div class="alert alert-danger">
+                            Impossible de vous identifier correctement. 
+                        </div>
+
+                    <?php
+                }
             }
 
             ?>

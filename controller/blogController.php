@@ -22,12 +22,19 @@ require_once("option.php");
        {
               if(!empty($_POST["comment"]))
               {
-                     require_once("./model/ArticleManager.php");
+                     try
+                     {
+                            require_once("./model/CommentManager.php");
 
-                     $_comment = htmlspecialchars($_POST["comment"]);
+                            $_comment = htmlspecialchars($_POST["comment"]);
 
-                     $_articleManager = new ArticleManager();
-                     $_articleManager->addComment($_SESSION["idArticle"],$_comment);
+                            $_commentManager = new CommentManager();
+                            $_commentManager->addComment($_SESSION["idArticle"],$_comment);
+                     }
+                     catch (Exception $ex)
+                     {
+                            throw new Exception($ex->getMessage());
+                     }
               }
 
               header("location:article");
@@ -37,14 +44,21 @@ require_once("option.php");
        function deleteComment()
        {
        
-               if(!empty($_POST["idCom"]))
+              if(!empty($_POST["idCom"]))
               {
-                     require_once("./model/ArticleManager.php");
+                     try
+                     {
+                            require_once("./model/CommentManager.php");
 
-                     $_idComment = htmlspecialchars($_POST["idCom"]);
+                            $_idComment = htmlspecialchars($_POST["idCom"]);
 
-                     $_articleManager = new ArticleManager();
-                     $_articleManager->deleteComment($_idComment);
+                            $_commentManager = new CommentManager();
+                            $_commentManager->deleteComment($_idComment);
+                     }
+                     catch (Exception $ex)
+                     {
+                            throw new Exception($ex->getMessage());
+                     }
               }
 
               header("location:article");
