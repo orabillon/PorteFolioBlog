@@ -82,4 +82,28 @@
             }
 
         }
+
+        function getNumberImages($idProjet)
+        {
+            try
+            {
+                $_idProjet = htmlspecialchars($idProjet);
+
+                $bdd = $this->getConnection();
+                
+                $requete = $bdd->prepare("SELECT COUNT(*) as nb FROM images WHERE id_project = ? ");
+                $requete->execute([$_idProjet]);
+
+                while($_resultat = $requete->fetch())
+                {
+                    return $_resultat["nb"];
+                }
+
+                return 0;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
+        }
     }

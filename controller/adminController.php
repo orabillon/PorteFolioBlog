@@ -134,7 +134,53 @@ require_once("option.php");
               }
        }
 
-       
+       function deleteMessage()
+       {
+              try
+              {
+                     if (!empty($_POST["idDeleteMessage"]))
+                     {
+                            require_once("./model/MessageManager.php");
+
+                            $id_message = htmlspecialchars($_POST["idDeleteMessage"]);
+
+                            $_messageManager = new MessageManager();
+                            
+                            $_messageManager->deleteMessage($id_message);
+                     }
+
+                     header("location:admin");
+                     exit();
+              }
+              catch (Exception $ex)
+              {
+                     throw new Exception($ex->getMessage());
+              }
+       }
+
+       function updateMessage()
+       {
+              try
+              {
+                     if (!empty($_POST["idUpdateMessage"]))
+                     {
+                            require_once("./model/MessageManager.php");
+
+                            $id_message = htmlspecialchars($_POST["idUpdateMessage"]);
+
+                            $_messageManager = new MessageManager();
+                            
+                            $_messageManager->updateMessage($id_message);
+                     }
+
+                     header("location:admin");
+                     exit();
+              }
+              catch (Exception $ex)
+              {
+                     throw new Exception($ex->getMessage());
+              }
+       }
 
        
        

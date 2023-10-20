@@ -65,5 +65,75 @@ require_once("option.php");
               exit();
        }
 
+       function blogManagement()
+       {
+              require("view/managementBlogView.php");
+       }
 
+       function deleteArticle()
+       {
+       
+              if(!empty($_POST["idDeleteArticle"]))
+              {
+                     try
+                     {
+                            require_once("./model/ArticleManager.php");
+
+                            $_idArticleDelete = htmlspecialchars($_POST["idDeleteArticle"]);
+
+                            $_ArticleManager = new ArticleManager();
+                            $_ArticleManager->deleteArticle($_idArticleDelete);
+                     }
+                     catch (Exception $ex)
+                     {
+                            throw new Exception($ex->getMessage());
+                     }
+              }
+
+              header("location:blogManagement");
+              exit();
+       }
+
+       function managementArticleView()
+       {
+              /*if(!empty($_POST["postId"]))
+              {
+                     $_SESSION["idArticle"] = $_POST["postId"];
+              }
+              */
+
+              require("view/managementArticleView.php"); 
+       }
+
+       function createArticle()
+       {
+              if (!empty($_POST["title"]) && !empty($_POST["description"]) && !empty($_POST["content"]) && !empty($_POST["category"]))
+              {
+                     try
+                     {
+                            $_title        = htmlspecialchars($_POST["title"]);
+                            $_description  = htmlspecialchars($_POST["description"]);
+                            $_content      = htmlspecialchars($_POST["content"]);
+                            $_categorie    = htmlspecialchars($_POST["category"]);
+                            $_publish      = 0;
+                            
+                            if (isset($_POST["publish"])){ $_publish = 1; };
+                            
+                            require_once("./model/ArticleManager.php");
+
+                            $_ArticleManager     = new ArticleManager();
+
+                            $_ArticleManager->createArticle($_title,$_description,$_content,$_categorie,$_publish);
+                     }
+                     catch (Exception $ex)
+                     {
+                            throw new Exception($ex->getMessage());
+                     }
+                    
+              }
+
+              header("location:blogManagement");
+              exit();
+       }
+       
        

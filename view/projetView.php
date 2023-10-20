@@ -19,71 +19,83 @@
     ob_start();
 ?>
 
-<section>
-    <div class="p-3 bg-sixth">
-        <div class="bg-light p-4 rounded-5">
-            <!-- carousel -->
-            <div id="ImgProjet" class="carousel slide carousel-fade mt-2" data-bs-ride="carousel">
+<?php
+    // Afficher carouselle que si des image existe
+    $_nb = $_projetManager->getNumberImages($_SESSION["idProjet"]);
 
-                <!-- Indicateurs -->
-                <ul class="carousel-indicators">
-                    <?php
-                        
-                        $_listeImage       = $_projetManager->getListeImagedProjet( $_SESSION["idProjet"]);
-                        $_projet           = $_projetManager->getProjet($_SESSION["idProjet"]);
+    if ($_nb != 0)
+    {
+        ?>
+            <section>
+                <div class="p-3 bg-sixth">
+                    <div class="bg-light p-4 rounded-5">
+                        <!-- carousel -->
+                        <div id="ImgProjet" class="carousel slide carousel-fade mt-2" data-bs-ride="carousel">
 
-                        $i = 0;
+                            <!-- Indicateurs -->
+                            <ul class="carousel-indicators">
+                                <?php
+                                    
+                                    $_listeImage       = $_projetManager->getListeImagedProjet( $_SESSION["idProjet"]);
+                                    
 
-                        while($_image = $_listeImage->fetch()){
-                        
-                            ?>
-                                <li data-bs-target="#ImgProjet" data-bs-slide-to="<?= $i ?>" <?php if($i == 0){echo 'class="active"';} ?>></li>
+                                    $i = 0;
+
+                                    while($_image = $_listeImage->fetch()){
+                                    
+                                        ?>
+                                            <li data-bs-target="#ImgProjet" data-bs-slide-to="<?= $i ?>" <?php if($i == 0){echo 'class="active"';} ?>></li>
+                                        <?php
+
+                                        $i++;
+                                    }
+                                ?> 
+                            </ul>
+
+                            <!-- Contenu du carousel -->
+                            <div class="carousel-inner">
+
                             <?php
+                                    $_listeImage        = $_projetManager->getListeImagedProjet($_SESSION["idProjet"]);
 
-                            $i++;
-                        }
-                    ?> 
-                </ul>
+                                    $i = 0;
 
-                <!-- Contenu du carousel -->
-                <div class="carousel-inner">
+                                    while($_image = $_listeImage->fetch()){
+                                    
+                                        ?>
+                                            <!-- Premier slide -->
+                                            <div class="carousel-item active" data-bs-interval="5000">
+                                                <img src="public/Assets/<?= $_image["image"]?>" class="w-100 d-block" alt="imageProjet">
+                                            </div>
+                                        <?php
+                                    }
+                                ?> 
 
-                <?php
-                        $_listeImage        = $_projetManager->getListeImagedProjet($_SESSION["idProjet"]);
+                            </div>
 
-                        $i = 0;
+                            <!-- Controles -->
+                            <a class="carousel-control-prev" href="#ImgProjet" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                                <span class="sr-only">Précédent</span>
+                            </a>
+                            <a class="carousel-control-next" href="#ImgProjet" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                                <span class="sr-only">Suivant</span>
+                            </a>
 
-                        while($_image = $_listeImage->fetch()){
-                        
-                            ?>
-                                <!-- Premier slide -->
-                                <div class="carousel-item active" data-bs-interval="5000">
-                                    <img src="public/Assets/<?= $_image["image"]?>" class="w-100 d-block" alt="imageProjet">
-                                </div>
-                            <?php
-                        }
-                    ?> 
-
+                        </div>
+                    </div>
                 </div>
+            </section>
+        <?php 
+    }
+    ?>
 
-                <!-- Controles -->
-                <a class="carousel-control-prev" href="#ImgProjet" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                    <span class="sr-only">Précédent</span>
-                </a>
-                <a class="carousel-control-next" href="#ImgProjet" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                    <span class="sr-only">Suivant</span>
-                </a>
-
-            </div>
-        </div>
-    </div>
-</section>
 <section>
     <div class="p-3 bg-sixth">
         <div class="p-6 bg-light rounded-5">
             <?php
+                $_projet  = $_projetManager->getProjet($_SESSION["idProjet"]);
                 // Article
                 while($detail = $_projet->fetch())
                 {

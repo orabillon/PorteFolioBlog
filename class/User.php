@@ -87,8 +87,8 @@ class User extends Manager {
         {
             $bdd = $this->getConnection();
 
-            $req = $bdd->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, password = ?, blocked = ?, admin = ? WHERE id = ?");
-            $req->execute([$this->getFirstName(), $this->getLastName(), $this->getMail(), $this->getPassword(), $this->getBlocked(), $this->getAdmin() ,$this->getId()]);
+            $req = $bdd->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ?, password = ?, blocked = ?, admin = ?, date_update = ? WHERE id = ?");
+            $req->execute([$this->getFirstName(), $this->getLastName(), $this->getMail(), $this->getPassword(), $this->getBlocked(), $this->getAdmin(), date("Y-m-d H:i:s") ,$this->getId()]);
         }
         catch (Exception $e)
         {

@@ -53,6 +53,30 @@
             }
         }
 
+        function getNumberImages($idArticle)
+        {
+            try
+            {
+                $_idArticle = htmlspecialchars($idArticle);
+
+                $bdd = $this->getConnection();
+                
+                $requete = $bdd->prepare("SELECT COUNT(*) as nb FROM images WHERE id_article = ? ");
+                $requete->execute([$_idArticle]);
+
+                while($_resultat = $requete->fetch())
+                {
+                    return $_resultat["nb"];
+                }
+
+                return 0;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
+        }
+
         function getImageCardArticle($idArticle)
         {
             try
@@ -95,6 +119,64 @@
                 throw new Exception($ex->getMessage());
             }
 
+        }
+
+        function getListeArticleManagement()
+        {
+
+            try 
+            {
+                $bdd = $this->getConnection();
+                $requete =  $bdd->query("SELECT articles.id, articles.content, articles.date_creation, articles.date_update, articles.title, articles.description, articles.published, categories.categorie FROM articles INNER JOIN categories ON categories.id = articles.id_category" );
+        
+                return $requete;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
+        }
+
+        function deleteArticle($idArticle)
+        {
+
+            try 
+            {
+                $_idArticle = htmlspecialchars($idArticle);
+
+                $bdd = $this->getConnection();
+                $requete =  $bdd->prepare("DELETE FROM articles WHERE id = ?" );
+                $requete->execute([$_idArticle]);
+        
+                return $requete;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
+        }
+
+        function CreateArticle($title, $description, $content, $categorie, $publish)
+        {
+
+            try 
+            {
+                $_title = htmlspecialchars($title);
+                $_description = htmlspecialchars($description);
+                $_content = htmlspecialchars($content);
+                $_categorie = htmlspecialchars($categorie);
+                $_publish = htmlspecialchars($publish);
+
+                $bdd = $this->getConnection();
+                $requete =  $bdd->prepare("INSERT INTO articles(title, description, content, id_category, published) VALUE (?, ?, ?, ?, ?)" );
+                $requete->execute([$_title, $_description, $_content, $_categorie, $_publish]);
+        
+                return $requete;
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
         }
 
     }

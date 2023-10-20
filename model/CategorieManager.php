@@ -18,4 +18,26 @@
             }
         }
 
+        function getIdCategorie($categorie)
+        {
+           try
+           {
+                $_categorie = htmlspecialchars($categorie);
+
+                $bdd = $this->getConnection();
+                $requete = $bdd->prepare('SELECT id FROM categories WHERE categorie = ?');
+                $requete->execute([$_categorie]);
+
+                while($result = $requete->fetch())
+                {
+                    return $result["id"];
+                }
+
+           }
+           catch (Exception $ex)
+            {
+                return 0;
+            }
+        }
+
     }

@@ -135,26 +135,44 @@
                     {
                 ?>
                 <li class="nav-item">
-                <?php 
-                    if ((isset($_REQUEST["page"]) && $_REQUEST["page"] == "admin") || !isset($_REQUEST["page"]))
-                    {
-                ?>
-                    <a href="admin" class="nav-link active">Administration</a>
-                <?php 
-                    }
-                    else
-                    {
-                ?>
-                    <a href="admin" class="nav-link">Administration</a>
-                <?php 
-                    }
+                    <?php 
+                        if ((isset($_REQUEST["page"]) && $_REQUEST["page"] == "admin") || !isset($_REQUEST["page"]))
+                        {
+                    ?>
+                        <a href="admin" class="nav-link active">Administration</a>
+                    <?php 
+                        }
+                        else
+                        {
+                    ?>
+                        <a href="admin" class="nav-link">Administration</a>
+                    <?php 
+                        }
+                    ?>
+                </li>
+                <li class="nav-item">
+                    <?php 
+                        if ((isset($_REQUEST["page"]) && ($_REQUEST["page"] == "blogManagement") || $_REQUEST["page"] == "editArticle" )|| !isset($_REQUEST["page"]))
+                        {
+                    ?>
+                        <a href="blogManagement" class="nav-link active">Gestion blog</a>
+                    <?php 
+                        }
+                        else
+                        {
+                    ?>
+                        <a href="blogManagement" class="nav-link">Gestion blog</a>
+                    <?php 
+                        }
+                    ?>
+                </li>
+                <?php
                 }
                 ?>
                    <?php 
                     if (isset($_SESSION["connect"]))
                     {
                 ?> 
-                </li>
                 <li class="nav-item">
                     <a href="logout.php" class="nav-link">Se déconnecter</a>
                 </li>

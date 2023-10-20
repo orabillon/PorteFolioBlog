@@ -92,7 +92,29 @@
                         adminUser(0);
                         break;
 
-                        
+                    case "deleteMessage":
+                        deleteMessage();
+                        break;
+
+                    case "updateMessage":
+                        updateMessage();
+                        break;
+
+                    case "blogManagement":
+                        blogManagement();
+                        break;
+                    
+                    case "deleteArticle":
+                        deleteArticle();
+                        break;
+
+                    case "managementArticleView":
+                        managementArticleView();
+                        break;
+
+                    case "createArticle";
+                        createArticle();
+                        break;
                 
                     default:
                         throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
