@@ -38,9 +38,9 @@
                         
                         ?>
                             <tr>                               
-                                <td><?= $_article["title"] ?></td>
-                                <td><?= $_article["categorie"] ?></td>
-                                <td><?= $_article["description"] ?></td>
+                                <td><?= htmlspecialchars_decode($_article["title"]) ?></td>
+                                <td><?= htmlspecialchars_decode($_article["categorie"]) ?></td>
+                                <td><?= htmlspecialchars_decode($_article["description"]) ?></td>
                                 <td class="text-center"><?= $_article["date_creation"] ?></td>
                                 <td class="text-center"><?= $_article["date_update"] ?></td>
                                 <td class="text-center"><?php if($_article["published"] == 1){ echo "Oui";} else {echo "Non";}  ?></td>

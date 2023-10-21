@@ -123,7 +123,48 @@ require_once("option.php");
 
                             $_ArticleManager     = new ArticleManager();
 
-                            $_ArticleManager->createArticle($_title,$_description,$_content,$_categorie,$_publish);
+                            $_idArticle = $_ArticleManager->createArticle($_title,$_description,$_content,$_categorie,$_publish);
+
+                            if(count($_FILES) > 0)
+                            {
+                                   $nombreImage = count($_FILES);
+                                   
+                                   for ($i = 2; $i <=  1 + $nombreImage; $i++) 
+                                   {
+                                          echo $_FILES["image".$i]["name"]."<br>";
+                                          // gestion de l'image
+                                          // test si image
+                                          if(isset($_FILES["image".$i]) && $_FILES["image".$i]["error"] === 0)
+                                          {
+                                                 // test poid
+                                                 if($_FILES["image".$i]["size"] <= 3000000)
+                                                 {
+                                                        //fichier autoriser
+                                                        $_informationsImage  = pathinfo($_FILES["image".$i]["name"]);
+                                                        $_extentension       = $_informationsImage["extension"];
+                                                        $_allowExtension     = ["jpg","jpeg","png"];
+                                                        $_nameImageSav       = sha1(time().$_FILES["image".$i]["name"].rand()).".".$_extentension;
+
+                                                        if(in_array($_extentension, $_allowExtension))
+                                                        {
+                                                               try
+                                                               {
+                                                                      // Chemin absolue obligatoire sinon marche pas ????
+                                                               $_res = move_uploaded_file($_FILES["image".$i]["tmp_name"], '/opt/lampp/htdocs/PorteFolioBlog/public/Assets/'.$_nameImageSav); 
+                                                               }
+                                                               catch (Exception $e)
+                                                               {
+                                                                      throw new Exception($e->getMessage());
+                                                               }
+                                                        
+
+                                                               $_ArticleManager->SaveImageArticle($_idArticle,$_nameImageSav);
+                                                        }
+                                                 }
+                                          }
+                                   }
+                            }
+                            
                      }
                      catch (Exception $ex)
                      {

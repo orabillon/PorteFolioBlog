@@ -170,13 +170,37 @@
                 $bdd = $this->getConnection();
                 $requete =  $bdd->prepare("INSERT INTO articles(title, description, content, id_category, published) VALUE (?, ?, ?, ?, ?)" );
                 $requete->execute([$_title, $_description, $_content, $_categorie, $_publish]);
-        
-                return $requete;
+
+                $requete = $bdd->prepare("SELECT id FROM articles WHERE title = ? AND description = ? AND content = ? AND id_category = ? AND published = ?");
+                $requete->execute([$_title, $_description, $_content, $_categorie, $_publish]);
+
+                while($result = $requete->fetch())
+                {
+                    return $result["id"];
+                }
             }
             catch (Exception $ex)
             {
                 throw new Exception($ex->getMessage());
             }
         }
+        
+        function SaveImageArticle($idArticle, $nameImage)
+        {
 
+            try 
+            {
+                $_id = htmlspecialchars($idArticle);
+                $_nameImage = htmlspecialchars($nameImage);
+
+                $bdd = $this->getConnection();
+                $requete =  $bdd->prepare("INSERT INTO images(id_article,image) VALUE (?, ?)" );
+                $requete->execute([$_id, $_nameImage]);
+
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
+        }
     }

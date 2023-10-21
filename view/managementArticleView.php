@@ -8,10 +8,19 @@
     ob_start();
 ?>
 
+<script type="text/javascript">
+function create_champ(i) {
+var i2 = i + 1;
+document.getElementById('leschamps_'+i).innerHTML = '<input type="file" name="image'+i+'"></span>';
+/* on limite ici le nombre de champs à un maximum de 10 */
+document.getElementById('leschamps_'+i).innerHTML += (i <= 10) ? '<br /><span id="leschamps_'+i2+'"><a href="javascript:create_champ('+i2+')">Ajouter un champs</a></span>' : '';
+}
+</script>
+
 <section>
     <div class="p-3 bg-fourth">
         <div class="p-6 bg-light rounded-5">
-            <form class="p-3" method="post" action="./createArticle">
+            <form class="p-3" method="post" action="./createArticle" enctype="multipart/form-data">
                 <p>
                     <label for="title" class="form-label">Titre</label>
                     <input type="text" name="title" id="title" class="form-control" required>
@@ -45,6 +54,9 @@
 
                     ?>
                     </select>
+                </p>
+                <p>
+                    <span id="leschamps_2"><a href="javascript:create_champ(2)">Ajouter une image</a></span>
                 </p>
                 <p class="form-check form-switch">
                     <label for="publish" class="form-check-label">Rendre accessible</label>
