@@ -108,11 +108,7 @@ require_once("option.php");
 
        function managementArticleView()
        {
-              /*if(!empty($_POST["postId"]))
-              {
-                     $_SESSION["idArticle"] = $_POST["postId"];
-              }
-              */
+             
 
               require("view/managementArticleView.php"); 
        }
@@ -170,7 +166,7 @@ require_once("option.php");
                                                                }
                                                         
 
-                                                               $_ArticleManager->SaveImageArticle($_idArticle,$_nameImageSav);
+                                                               $_ArticleManager->SaveImageArticle($_idArticle,$_nameImageSav,$_FILES["image".$i]["name"]);
                                                         }
                                                  }
                                           }
@@ -186,6 +182,136 @@ require_once("option.php");
               }
 
               header("location:blogManagement");
+              exit();
+       }
+
+       function editArticle()
+       {
+              var_dump($_SESSION);
+              
+              if (!empty($_POST["idEditArticle"]))
+              {
+                     $_SESSION["idEditArticle"] = $_POST["idEditArticle"];
+                     
+                     header("location:managementArticleView");
+                     exit();
+              }
+              
+              header("location:blogManagement");
+              exit();
+       }
+
+       function updateArticle()
+       {
+              if (!empty($_POST["title"]) && !empty($_POST["description"]) && !empty($_POST["content"]) && !empty($_POST["category"]) && !empty($_POST["idEditArticle"]))
+              {
+                     try
+                     {
+                            $_title        = htmlspecialchars($_POST["title"]);
+                            $_description  = htmlspecialchars($_POST["description"]);
+                            $_content      = htmlspecialchars($_POST["content"]);
+                            $_categorie    = htmlspecialchars($_POST["category"]);
+                            $_publish      = 0;
+                            $_idArticle    = htmlspecialchars($_POST["idEditArticle"]);
+                            
+                            if (isset($_POST["publish"])){ $_publish = 1; };
+
+                            require_once("./model/ArticleManager.php");
+
+                            $_ArticleManager     = new ArticleManager();
+
+                            $_ArticleManager->UpdateArticle($_title,$_description,$_content,$_categorie,$_publish,$_idArticle);
+
+                            // ajout noouvelle image
+                            if(count($_FILES) > 0)
+                            {
+                                   $nombreImage = count($_FILES);
+                                   
+                                   for ($i = 2; $i <=  1 + $nombreImage; $i++) 
+                                   {
+                                          echo $_FILES["image".$i]["name"]."<br>";
+                                          // gestion de l'image
+                                          // test si image
+                                          if(isset($_FILES["image".$i]) && $_FILES["image".$i]["error"] === 0)
+                                          {
+                                                 // test poid
+                                                 if($_FILES["image".$i]["size"] <= 3000000)
+                                                 {
+                                                        //fichier autoriser
+                                                        $_informationsImage  = pathinfo($_FILES["image".$i]["name"]);
+                                                        $_extentension       = $_informationsImage["extension"];
+                                                        $_allowExtension     = ["jpg","jpeg","png"];
+                                                        $_nameImageSav       = sha1(time().$_FILES["image".$i]["name"].rand()).".".$_extentension;
+
+                                                        if(in_array($_extentension, $_allowExtension))
+                                                        {
+                                                               try
+                                                               {
+                                                                      // Chemin absolue obligatoire sinon marche pas ????
+                                                               $_res = move_uploaded_file($_FILES["image".$i]["tmp_name"], '/opt/lampp/htdocs/PorteFolioBlog/public/Assets/'.$_nameImageSav); 
+                                                               }
+                                                               catch (Exception $e)
+                                                               {
+                                                                      throw new Exception($e->getMessage());
+                                                               }
+                                                        
+
+                                                               $_ArticleManager->SaveImageArticle($_idArticle,$_nameImageSav,$_FILES["image".$i]["name"]);
+                                                        }
+                                                 }
+                                          }
+                                   }
+                            }
+
+
+                     }
+                     catch (Exception $e)
+                     {
+                            throw new Exception($e->getMessage());
+                     }
+              }
+
+              if (isset($_SESSION["idEditArticle"])){
+                     // sinon on n'accede plus a la creation d'un article apres une modification
+                     unset($_SESSION["idEditArticle"]);
+              }
+              
+              header("location:blogManagement");
+              exit();
+       }
+
+       function gestionImageArticle()
+       {
+
+              if(!empty($_POST["idEditArticle"]))
+              {
+                     $_SESSION["idEditArticle"] = $_POST["idEditArticle"];
+              }
+              
+
+            require("./view/managementBlogGestionImage.php");
+       
+       }
+
+       function gestionImageArticleDelete()
+       {
+              if (!empty($_POST["idDeleteImageArticle"]) && !empty($_POST["NameDeleteImageArticle"]))
+              {
+                     $_idImage     = htmlspecialchars($_POST["idDeleteImageArticle"]);
+                     $_nameImage   = htmlspecialchars($_POST["NameDeleteImageArticle"]);
+
+                     
+                     require_once("./model/ArticleManager.php");
+
+                     $_ArticleManager = new ArticleManager();
+                     $_ArticleManager->DeleteImageArticle($_idImage);
+
+                     // suppression fichier 
+                     unlink("/opt/lampp/htdocs/PorteFolioBlog/public/Assets/".$_nameImage);           
+                     
+              }
+
+              header("location:gestionImageArticle");
               exit();
        }
        

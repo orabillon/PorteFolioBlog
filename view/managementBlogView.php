@@ -13,7 +13,7 @@
         <div class="p-6 bg-light rounded-5">
             <a href="./managementArticleView"><i class="fa-solid fa-circle-plus fa-2xl"></i></a>
             <div  class="table-responsive">
-                <table class="my-4 table table-striped table-hover table-responsive">
+                <table class="my-4 table table-striped table-hover">
 
                     <thead class="text-center fw-bold thead-dark">
                         <tr>
@@ -23,7 +23,7 @@
                             <th>Date création</th>
                             <th>Date dernière modification</th>
                             <th>Publier</th>
-                            <th colspan="2">Options</th>
+                            <th colspan="3">Options</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,6 +45,7 @@
                                 <td class="text-center"><?= $_article["date_update"] ?></td>
                                 <td class="text-center"><?php if($_article["published"] == 1){ echo "Oui";} else {echo "Non";}  ?></td>
                                 <td><button type="button" data-bs-toggle="modal" data-bs-target="#edit-<?= $_article["id"] ?>"><i class="fa-solid fa-pen-nib"></i></button></td>
+                                <td><button type="button" data-bs-toggle="modal" data-bs-target="#gestionImg-<?= $_article["id"] ?>"><i class="fa-regular fa-image"></i></button></td>
                                 <td><button type="button" data-bs-toggle="modal" data-bs-target="#delete-<?= $_article["id"] ?>"><i class="fa-regular fa-trash-can"></i></button></td>
                             </tr>
                             <!-- Modales -->
@@ -103,6 +104,36 @@
                                                 <form method="post" action="./editArticle">
                                                     <input type="hidden" id="idEditArticle" name="idEditArticle" value="<?= $_article["id"] ?>" />
                                                     <button type="submit" class="btn btn-danger">Modifier</button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="gestionImg-<?= $_article["id"] ?>" data-bs-backdrop="static">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+
+                                            <!-- Header -->
+                                            <div class="modal-header">
+                                                <h5 class="modal-title"></h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                    <span>&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <!-- Body -->
+                                            <div class="modal-body">
+                                                <p class="m-0">Gérer les images de l'article</p>
+                                            </div>
+
+                                            <!-- Footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                
+                                                <form method="post" action="./gestionImageArticle">
+                                                    <input type="hidden" id="idEditArticle" name="idEditArticle" value="<?= $_article["id"] ?>" />
+                                                    <button type="submit" class="btn btn-danger">Gérer images</button>
                                                 </form>
                                             </div>
 

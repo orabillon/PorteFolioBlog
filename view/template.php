@@ -152,14 +152,22 @@
                 </li>
                 <li class="nav-item">
                     <?php 
-                        if ((isset($_REQUEST["page"]) && ($_REQUEST["page"] == "blogManagement") || $_REQUEST["page"] == "editArticle" )|| !isset($_REQUEST["page"]))
+                        if ((isset($_REQUEST["page"]) && ($_REQUEST["page"] == "blogManagement") || $_REQUEST["page"] == "gestionImageArticle"|| $_REQUEST["page"] == "managementArticleView" || $_REQUEST["page"] == "editArticle" )|| !isset($_REQUEST["page"]))
                         {
+                            if (isset($_SESSION["idEditArticle"])){
+                                // sinon on n'accede plus a la creation d'un article apres une modification
+                                unset($_SESSION["idEditArticle"]);
+                         }
                     ?>
                         <a href="blogManagement" class="nav-link active">Gestion blog</a>
                     <?php 
                         }
                         else
                         {
+                            if (isset($_SESSION["idEditArticle"])){
+                                // sinon on n'accede plus a la creation d'un article apres une modification
+                                unset($_SESSION["idEditArticle"]);
+                         }
                     ?>
                         <a href="blogManagement" class="nav-link">Gestion blog</a>
                     <?php 

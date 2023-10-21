@@ -25,7 +25,7 @@
         <div class="p-6 bg-light rounded-5">
             <h2>Gestion utilisateurs</h2>
             <div  class="table-responsive">
-                <table class="my-4 table table-striped table-hover table-responsive">
+                <table class="my-4 table table-striped table-hover">
 
                     <thead class="text-center fw-bold">
                         <tr>
@@ -226,7 +226,7 @@
         <div class="p-6 bg-light rounded-5">
             <h2>Gestion Message</h2>
             <div  class="table-responsive">
-                <table class="my-4 table table-striped table-hover table-responsive">
+                <table class="my-4 table table-striped table-hover">
 
                     <thead class="text-center fw-bold thead-dark">
                         <tr>

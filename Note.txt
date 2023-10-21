@@ -10,3 +10,5 @@ Problème rencontrer durant le dev que j'ai pas réussi à resoudre  et ai abban
 
 - Pour le deplacement des image et leurs suppression (move_uploaded_file + unlink) obligation de passer par le chemin absolu de la machine.
     je ne comprend pas pourquoi les chemin relatif ne marche pas 
+
+- suppression image impossible depuis vue modification, obligation de creer une vue specifique, cause melange des chemins php avec l'utilisation des modales

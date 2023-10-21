@@ -42,7 +42,7 @@
                 $bdd = $this->getConnection();
                 $requete = null;
 
-                $requete = $bdd->prepare("SELECT articles.id, articles.content, articles.date_creation, articles.title, articles.description FROM articles WHERE articles.id = ? ");
+                $requete = $bdd->prepare("SELECT articles.id, articles.content, articles.date_creation, articles.title, articles.description, articles.published, articles.id_category  FROM articles WHERE articles.id = ? ");
                 $requete->execute([$_idArticle]);
                 
                 return $requete;
@@ -185,17 +185,18 @@
             }
         }
         
-        function SaveImageArticle($idArticle, $nameImage)
+        function SaveImageArticle($idArticle, $nameImage, $baseName)
         {
 
             try 
             {
-                $_id = htmlspecialchars($idArticle);
+                $_id        = htmlspecialchars($idArticle);
                 $_nameImage = htmlspecialchars($nameImage);
+                $_baseName  = htmlspecialchars($baseName);
 
                 $bdd = $this->getConnection();
-                $requete =  $bdd->prepare("INSERT INTO images(id_article,image) VALUE (?, ?)" );
-                $requete->execute([$_id, $_nameImage]);
+                $requete =  $bdd->prepare("INSERT INTO images(id_article,image,BaseImageName) VALUE (?, ?, ?)" );
+                $requete->execute([$_id, $_nameImage,$_baseName]);
 
             }
             catch (Exception $ex)
@@ -215,6 +216,29 @@
                 $bdd = $this->getConnection();
                 $requete =  $bdd->prepare("DELETE FROM images WHERE id = ?" );
                 $requete->execute([$_id]);
+
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
+        }
+
+        function UpdateArticle($title, $description, $content, $categorie, $publish, $idArticle)
+        {
+
+            try 
+            {
+                $_title = htmlspecialchars($title);
+                $_description = htmlspecialchars($description);
+                $_content = htmlspecialchars($content);
+                $_categorie = htmlspecialchars($categorie);
+                $_publish = htmlspecialchars($publish);
+                $_idArticle = htmlspecialchars($idArticle);
+
+                $bdd = $this->getConnection();
+                $requete =  $bdd->prepare("UPDATE articles SET title = ?, description = ?, content = ?, id_category = ?, published = ? WHERE id = ?" );
+                $requete->execute([$_title, $_description, $_content, $_categorie, $_publish, $_idArticle]);
 
             }
             catch (Exception $ex)

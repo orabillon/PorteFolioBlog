@@ -116,6 +116,23 @@
                         createArticle();
                         break;
                 
+
+                    case "editArticle";
+                        editArticle();
+                        break;
+
+                    case "updateArticle";
+                        updateArticle();
+                        break;
+
+                    case "gestionImageArticle";
+                        gestionImageArticle();
+                        break;
+
+                    case "gestionImageArticleDelete";
+                        gestionImageArticleDelete();
+                        break;
+
                     default:
                         throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
                         break;

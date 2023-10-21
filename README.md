@@ -17,6 +17,8 @@ les technologies employées seront :
 - Bootstrap / Sass
 - PHP / MYSQL
 
+- utilisation de XAMPP sur Ubuntu
+
 
 Voici les differentes étapes de travaille :
 
