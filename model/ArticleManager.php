@@ -203,4 +203,23 @@
                 throw new Exception($ex->getMessage());
             }
         }
+
+        function DeleteImageArticle($idImage)
+        {
+
+            try 
+            {
+                $_id = htmlspecialchars($idImage);
+
+
+                $bdd = $this->getConnection();
+                $requete =  $bdd->prepare("DELETE FROM images WHERE id = ?" );
+                $requete->execute([$_id]);
+
+            }
+            catch (Exception $ex)
+            {
+                throw new Exception($ex->getMessage());
+            }
+        }
     }

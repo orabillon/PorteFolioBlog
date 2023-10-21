@@ -7,3 +7,6 @@ Problème rencontrer durant le dev que j'ai pas réussi à resoudre  et ai abban
     si je sauve en base sans sécurité et que j'affiche la sa marche. 
 
     --> pour la saisie des articles et projet pas de securisation volontaire pour permetre la mise en forme. 
+
+- Pour le deplacement des image et leurs suppression (move_uploaded_file + unlink) obligation de passer par le chemin absolu de la machine.
+    je ne comprend pas pourquoi les chemin relatif ne marche pas 

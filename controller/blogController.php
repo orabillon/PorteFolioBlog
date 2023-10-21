@@ -83,6 +83,18 @@ require_once("option.php");
 
                             $_ArticleManager = new ArticleManager();
                             $_ArticleManager->deleteArticle($_idArticleDelete);
+
+                            // supression des image
+                            $_listeImage = $_ArticleManager->getListeImagedArticle($_idArticleDelete);
+                            
+                            while($image = $_listeImage->fetch())
+                            {
+                                   $_ArticleManager->DeleteImageArticle($image["id"]);
+
+                                   // suppression fichier 
+                                   unlink("/opt/lampp/htdocs/PorteFolioBlog/public/Assets/".$image["image"]);
+                            }
+
                      }
                      catch (Exception $ex)
                      {
