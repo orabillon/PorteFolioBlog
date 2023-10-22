@@ -85,7 +85,7 @@ require_once("option.php");
                             $_ArticleManager->deleteArticle($_idArticleDelete);
 
                             // supression des image
-                            $_listeImage = $_ArticleManager->getListeImagedArticle($_idArticleDelete);
+                            $_listeImage = $_ArticleManager->getListeImageArticle($_idArticleDelete);
                             
                             while($image = $_listeImage->fetch())
                             {
@@ -94,6 +94,18 @@ require_once("option.php");
                                    // suppression fichier 
                                    unlink("/opt/lampp/htdocs/PorteFolioBlog/public/Assets/".$image["image"]);
                             }
+
+                            // suppression commentaire
+
+                            require_once("./model/CommentManager.php");
+
+                            $_commentManager     = new CommentManager();
+                            $_listeComment       = $_commentManager->getListeComment($_idArticleDelete);
+
+                            while($_comment = $_listeComment->fetch())
+                            {
+                                   $_commentManager->deleteComment($_comment["id"]);
+                            }                            
 
                      }
                      catch (Exception $ex)
@@ -187,8 +199,6 @@ require_once("option.php");
 
        function editArticle()
        {
-              var_dump($_SESSION);
-              
               if (!empty($_POST["idEditArticle"]))
               {
                      $_SESSION["idEditArticle"] = $_POST["idEditArticle"];
@@ -295,10 +305,11 @@ require_once("option.php");
 
        function gestionImageArticleDelete()
        {
-              if (!empty($_POST["idDeleteImageArticle"]) && !empty($_POST["NameDeleteImageArticle"]))
+              if (!empty($_POST["idDeleteImageArticle"]) && !empty($_POST["NameDeleteImageArticle"]) && !empty($_POST["idArticle"]))
               {
                      $_idImage     = htmlspecialchars($_POST["idDeleteImageArticle"]);
                      $_nameImage   = htmlspecialchars($_POST["NameDeleteImageArticle"]);
+                     $_idArticle   = htmlspecialchars($_POST["idArticle"]);
 
                      
                      require_once("./model/ArticleManager.php");
@@ -307,7 +318,9 @@ require_once("option.php");
                      $_ArticleManager->DeleteImageArticle($_idImage);
 
                      // suppression fichier 
-                     unlink("/opt/lampp/htdocs/PorteFolioBlog/public/Assets/".$_nameImage);           
+                     unlink("/opt/lampp/htdocs/PorteFolioBlog/public/Assets/".$_nameImage);   
+                     
+                     $_SESSION["idEditArticle"] = $_idArticle;
                      
               }
 

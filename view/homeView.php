@@ -15,7 +15,6 @@
         if(isset($_SESSION["connect"])){
             
             echo "Vous êtes connecter";
-           var_dump($_SESSION);
         }
         else
         {

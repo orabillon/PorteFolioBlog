@@ -1,24 +1,23 @@
 <?php 
-    $title = "Blog";
-    $couleurEntete = "bg-third";
-    $texteEntete = "Gestion blog";
-    $couleurTexteEntete = "text-danger";
+    $title = "Projet";
+    $couleurEntete = "bg-primary";
+    $texteEntete = "Mes Projets";
+    $couleurTexteEntete = "text-white";
 
     // mise en cache du contenu de la page pour la creation de la variable du template
     ob_start();
 ?>
 
 <section>
-    <div class="p-3 bg-fourth">
+    <div class="p-3 bg-sixth">
         <div class="p-6 bg-light rounded-5">
-            <a href="./managementArticleView"><i class="fa-solid fa-circle-plus fa-2xl"></i></a>
+            <a href="./managementProjetDetailView"><i class="fa-solid fa-circle-plus fa-2xl"></i></a>
             <div  class="table-responsive">
                 <table class="my-4 table table-striped table-hover">
 
                     <thead class="text-center fw-bold thead-dark">
                         <tr>
-                            <th>Titre</th>
-                            <th>Catégorie</th>
+                            <th>Nom</th>
                             <th>Description</th>
                             <th>Date création</th>
                             <th>Date dernière modification</th>
@@ -28,28 +27,27 @@
                     </thead>
                     <tbody>
                     <?php 
-                        require_once("./model/ArticleManager.php");
-                        $_articleManager = new ArticleManager();
+                        require_once("./model/ProjetManager.php");
+                        $_projetManager = new ProjetManager();
 
-                        $_listeArticle = $_articleManager->getListeArticleManagement();
+                        $_listeProjet = $_projetManager->getListeProjetManagement(); 
 
-                        while($_article = $_listeArticle->fetch())
+                        while($_projet = $_listeProjet->fetch())
                         {
                         
                         ?>
                             <tr>                               
-                                <td><?= htmlspecialchars_decode($_article["title"]) ?></td>
-                                <td><?= htmlspecialchars_decode($_article["categorie"]) ?></td>
-                                <td><?= htmlspecialchars_decode($_article["description"]) ?></td>
-                                <td class="text-center"><?= $_article["date_creation"] ?></td>
-                                <td class="text-center"><?= $_article["date_update"] ?></td>
-                                <td class="text-center"><?php if($_article["published"] == 1){ echo "Oui";} else {echo "Non";}  ?></td>
-                                <td><button type="button" data-bs-toggle="modal" data-bs-target="#edit-<?= $_article["id"] ?>"><i class="fa-solid fa-pen-nib"></i></button></td>
-                                <td><button type="button" data-bs-toggle="modal" data-bs-target="#gestionImg-<?= $_article["id"] ?>"><i class="fa-regular fa-image"></i></button></td>
-                                <td><button type="button" data-bs-toggle="modal" data-bs-target="#delete-<?= $_article["id"] ?>"><i class="fa-regular fa-trash-can"></i></button></td>
+                                <td><?= htmlspecialchars_decode($_projet["name"]) ?></td>
+                                <td><?= htmlspecialchars_decode($_projet["description"]) ?></td>
+                                <td class="text-center"><?= $_projet["date_creation"] ?></td>
+                                <td class="text-center"><?= $_projet["date_update"] ?></td>
+                                <td class="text-center"><?php if($_projet["display"] == 1){ echo "Oui";} else {echo "Non";}  ?></td>
+                                <td><button type="button" data-bs-toggle="modal" data-bs-target="#edit-<?= $_projet["id"] ?>"><i class="fa-solid fa-pen-nib"></i></button></td>
+                                <td><button type="button" data-bs-toggle="modal" data-bs-target="#gestionImg-<?= $_projet["id"] ?>"><i class="fa-regular fa-image"></i></button></td>
+                                <td><button type="button" data-bs-toggle="modal" data-bs-target="#delete-<?= $_projet["id"] ?>"><i class="fa-regular fa-trash-can"></i></button></td>
                             </tr>
                             <!-- Modales -->
-                            <div class="modal fade" id="delete-<?= $_article["id"] ?>" data-bs-backdrop="static">
+                            <div class="modal fade" id="delete-<?= $_projet["id"] ?>" data-bs-backdrop="static">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
 
@@ -63,15 +61,15 @@
 
                                             <!-- Body -->
                                             <div class="modal-body">
-                                                <p class="m-0">Supprimer l'article - <?= htmlspecialchars_decode($_article["title"]) ?></p>
+                                                <p class="m-0">Supprimer le projet - <?= htmlspecialchars_decode($_projet["name"]) ?></p>
                                             </div>
 
                                             <!-- Footer -->
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
                                                 
-                                                <form method="post" action="./deleteArticle">
-                                                    <input type="hidden" id="idDeleteArticle" name="idDeleteArticle" value="<?= $_article["id"] ?>" />
+                                                <form method="post" action="./deleteProjet">
+                                                    <input type="hidden" id="idDeleteProjet" name="idDeleteProjet" value="<?= $_projet["id"] ?>" />
                                                     <button type="submit" class="btn btn-danger">Supprimer</button>
                                                 </form>
                                             </div>
@@ -79,8 +77,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal fade" id="edit-<?= $_article["id"] ?>" data-bs-backdrop="static">
+                            </div> 
+                            <div class="modal fade" id="edit-<?= $_projet["id"] ?>" data-bs-backdrop="static">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
 
@@ -94,23 +92,23 @@
 
                                             <!-- Body -->
                                             <div class="modal-body">
-                                                <p class="m-0">Modifier l'article - <?= htmlspecialchars_decode($_article["title"]) ?></p>
+                                                <p class="m-0">Modifier le projet - <?= htmlspecialchars_decode($_projet["name"]) ?></p>
                                             </div>
 
                                             <!-- Footer -->
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
                                                 
-                                                <form method="post" action="./editArticle">
-                                                    <input type="hidden" id="idEditArticle" name="idEditArticle" value="<?= $_article["id"] ?>" />
+                                                <form method="post" action="./editProjet">
+                                                    <input type="hidden" id="idEditProjet" name="idEditProjet" value="<?= $_projet["id"] ?>" />
                                                     <button type="submit" class="btn btn-danger">Modifier</button>
                                                 </form>
                                             </div>
 
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal fade" id="gestionImg-<?= $_article["id"] ?>" data-bs-backdrop="static">
+                                </div> 
+                                <div class="modal fade" id="gestionImg-<?= $_projet["id"] ?>" data-bs-backdrop="static">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
 
@@ -124,15 +122,15 @@
 
                                             <!-- Body -->
                                             <div class="modal-body">
-                                                <p class="m-0">Gérer les images de l'article - <?= htmlspecialchars_decode($_article["title"]) ?></p>
+                                                <p class="m-0">Gérer les images du projet - <?= htmlspecialchars_decode($_projet["name"]) ?></p> 
                                             </div>
 
                                             <!-- Footer -->
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
                                                 
-                                                <form method="post" action="./gestionImageArticle">
-                                                    <input type="hidden" id="idEditArticle" name="idEditArticle" value="<?= $_article["id"] ?>" />
+                                                <form method="post" action="./gestionImageProjet">
+                                                    <input type="hidden" id="idEditProjet" name="idEditProjet" value="<?= $_projet["id"] ?>" />
                                                     <button type="submit" class="btn btn-danger">Gérer images</button>
                                                 </form>
                                             </div>

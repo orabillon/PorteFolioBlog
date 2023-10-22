@@ -36,7 +36,7 @@
                             <ul class="carousel-indicators">
                                 <?php
                                     
-                                    $_listeImage       = $_projetManager->getListeImagedProjet( $_SESSION["idProjet"]);
+                                    $_listeImage       = $_projetManager->getListeImageProjet( $_SESSION["idProjet"]);
                                     
 
                                     $i = 0;
@@ -56,7 +56,7 @@
                             <div class="carousel-inner">
 
                             <?php
-                                    $_listeImage        = $_projetManager->getListeImagedProjet($_SESSION["idProjet"]);
+                                    $_listeImage        = $_projetManager->getListeImageProjet($_SESSION["idProjet"]);
 
                                     $i = 0;
 

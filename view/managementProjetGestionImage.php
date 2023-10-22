@@ -1,23 +1,23 @@
 <?php 
-    $title = "Blog";
-    $couleurEntete = "bg-third";
-    $texteEntete = "Gestion blog";
-    $couleurTexteEntete = "text-danger";
+    $title = "Projet";
+    $couleurEntete = "bg-primary";
+    $texteEntete = "Mes Projets";
+    $couleurTexteEntete = "text-white";
 
     // mise en cache du contenu de la page pour la creation de la variable du template
     ob_start();
 ?>
 
 <section>
-    <div class="p-3 bg-fourth">
+    <div class="p-3 bg-sixth">
         <div class="p-6 bg-light rounded-5">
             <?php
-                if(isset($_SESSION["idEditArticle"]))
+                if(isset($_SESSION["idEditProjet"]))
                 {
-                    require_once("./model/ArticleManager.php");
-                    $_idArticle = htmlspecialchars($_SESSION["idEditArticle"]);
-                    $_articleManager    = new ArticleManager();
-                    $_listeImage        = $_articleManager->getListeImageArticle($_idArticle);
+                    require_once("./model/ProjetManager.php");
+                    $_idProjet          = htmlspecialchars($_SESSION["idEditProjet"]);
+                    $_projetManagement  = new ProjetManager();
+                    $_listeImage        = $_projetManagement->getListeImageProjet($_idProjet); 
 
                     ?>
                         
@@ -60,10 +60,10 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
                                                                 
-                                                                <form method="post" action="./gestionImageArticleDelete">
-                                                                    <input type="hidden" id="idArticle" name="idArticle" value="<?= $_idArticle ?>" />
-                                                                    <input type="hidden" id="idDeleteImageArticle" name="idDeleteImageArticle" value="<?= $result["id"] ?>" />
-                                                                    <input type="hidden" id="NameDeleteImageArticle" name="NameDeleteImageArticle" value="<?= $result["image"] ?>" />
+                                                                <form method="post" action="./gestionImageProjetDelete">
+                                                                    <input type="hidden" id="idProjet" name="idProjet" value="<?= $_idProjet ?>" />
+                                                                    <input type="hidden" id="idDeleteImageProjet" name="idDeleteImageProjet" value="<?= $result["id"] ?>" />
+                                                                    <input type="hidden" id="NameDeleteImageProjet" name="NameDeleteImageProjet" value="<?= $result["image"] ?>" />
                                                                     <button type="submit" class="btn btn-danger">Supprimer</button>
                                                                 </form>
                                                             </div>

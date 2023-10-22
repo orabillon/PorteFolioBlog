@@ -39,7 +39,7 @@
                             <ul class="carousel-indicators">
                                 <?php
                                     
-                                    $_listeImage        = $_articleManager->getListeImagedArticle( $_SESSION["idArticle"]);
+                                    $_listeImage        = $_articleManager->getListeImageArticle( $_SESSION["idArticle"]);
                                    
 
                                     $i = 0;
@@ -59,7 +59,7 @@
                             <div class="carousel-inner">
 
                             <?php
-                                    $_listeImage        = $_articleManager->getListeImagedArticle($_SESSION["idArticle"]);
+                                    $_listeImage        = $_articleManager->getListeImageArticle($_SESSION["idArticle"]);
 
                                     $i = 0;
 
@@ -153,7 +153,7 @@
                             <?php
                                 if (isset($_SESSION["idUser"]))
                                 {
-                                    if ($com["id_user"] == $_SESSION["idUser"])
+                                    if ($com["id_user"] == $_SESSION["idUser"] || $_SESSION["idUser"] == 1)
                                     {
                                         ?>
                                             <button type="button"  data-bs-toggle="modal" data-bs-target="#supprimer-<?= $com["id"] ?>"><i class="fa-regular fa-trash-can"></i></button> : 

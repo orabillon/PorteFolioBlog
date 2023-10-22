@@ -34,4 +34,5 @@ Voici les differentes étapes de travaille :
 - 17/10/2023 : Affichage des projets (liste + detail) + Recherche pb non résolu (voir note.txt) + dedbut gestion admin
 - 18/10/2023 : Modification suppression compte + fin gestion utilisateur + secutisation site  + recherche bug
 - 20/10/2023 : Gestion basique des messages + gestion blog (sans gestion image) + Prise en compte cas ou il n'y a pas d'image (article + projet)
-- 21/10/2023 : Ajout d'envoi image + suppression des image lors de la suppression de l'article
+- 21/10/2023 : Ajout d'envoi image + suppression des image lors de la suppression de l'article + suppression image via vue spécifique.
+- 22/10/2023 : Gestion des projets 

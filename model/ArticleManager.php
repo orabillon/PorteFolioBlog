@@ -101,7 +101,7 @@
             }
         }
 
-        function getListeImagedArticle($idArticle)
+        function getListeImageArticle($idArticle)
         {
            try
            {
@@ -237,8 +237,8 @@
                 $_idArticle = htmlspecialchars($idArticle);
 
                 $bdd = $this->getConnection();
-                $requete =  $bdd->prepare("UPDATE articles SET title = ?, description = ?, content = ?, id_category = ?, published = ? WHERE id = ?" );
-                $requete->execute([$_title, $_description, $_content, $_categorie, $_publish, $_idArticle]);
+                $requete =  $bdd->prepare("UPDATE articles SET title = ?, description = ?, content = ?, id_category = ?, published = ?, date_update = ?  WHERE id = ?" );
+                $requete->execute([$_title, $_description, $_content, $_categorie, $_publish, date("Y-m-d"), $_idArticle]);
 
             }
             catch (Exception $ex)

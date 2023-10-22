@@ -174,6 +174,30 @@
                         }
                     ?>
                 </li>
+                <li class="nav-item">
+                    <?php 
+                        if ((isset($_REQUEST["page"]) && ($_REQUEST["page"] == "projetManagement") || $_REQUEST["page"] == "gestionImageProjet"|| $_REQUEST["page"] == "managementProjetDetailView" || $_REQUEST["page"] == "editProjet" )|| !isset($_REQUEST["page"]))
+                        {
+                            if (isset($_SESSION["idEditProjet"])){
+                                // sinon on n'accede plus a la creation d'un article apres une modification
+                                unset($_SESSION["idEditProjet"]);
+                         }
+                    ?>
+                        <a href="projetManagement" class="nav-link active">Gestion projet</a>
+                    <?php 
+                        }
+                        else
+                        {
+                            if (isset($_SESSION["idEditProjet"])){
+                                // sinon on n'accede plus a la creation d'un article apres une modification
+                                unset($_SESSION["idEditProjet"]);
+                         }
+                    ?>
+                        <a href="projetManagement" class="nav-link">Gestion projet</a>
+                    <?php 
+                        }
+                    ?>
+                </li>
                 <?php
                 }
                 ?>

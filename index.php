@@ -133,6 +133,39 @@
                         gestionImageArticleDelete();
                         break;
 
+                    case "projetManagement":
+                        projetManagement();
+                        break;
+
+                    case "deleteProjet":
+                        deleteProjet();
+                        break;
+
+                    case "editProjet";
+                        editProjet();
+                        break;
+
+                    case "gestionImageProjet";
+                        gestionImageProjet();
+                        break;
+
+                    case "createProjet";
+                    createProjet();
+                    break;
+
+                    case "updateProjet";
+                        updateProjet();
+                        break;
+
+                    case "gestionImageProjetDelete";
+                        gestionImageProjetDelete();
+                        break;
+
+                    case "managementProjetDetailView":
+                        managementProjetDetailView();
+                        break;
+                        
+
                     default:
                         throw new Exception("Cette page n'existe pas ou a été supprimmée !!!");
                         break;
